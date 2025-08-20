@@ -4,13 +4,39 @@
   
     
     <entry>
-      <title>Hello World</title>
-      <link href="/2025/08/20/hello-world/"/>
-      <url>/2025/08/20/hello-world/</url>
+      <title>Git使用指南</title>
+      <link href="/2025/08/20/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/ArchLinux/git/git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/"/>
+      <url>/2025/08/20/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/ArchLinux/git/git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</url>
       
-        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start">Quick Start</h2><h3 id="Create-a-new-post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+        <content type="html"><![CDATA[<h1>Git 的安装</h1><h2 id="在-Arch-Linux-上安装">在 Arch Linux 上安装</h2><p>直接用<code>pacman</code>安装即可<br>一般情况下都是安装好了的</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S git</span><br></pre></td></tr></table></figure><h1>Git 的配置</h1><h2 id="Git-的三个配置文件">Git 的三个配置文件</h2><blockquote><p>Git 自带一个 <code>git config</code> 工具来控制 Git 的外观和行为</p></blockquote><ul><li><code>/etc/gitconfig</code>文件：用 <code>sudo git config --system</code> 进行配置，针对整个系统</li><li><code>~/.gitconfig</code>或<code>~/.config/git/config</code>文件：用 <code>git config --global</code> 配置，针对当前用户</li><li><code>.git/config</code> 文件：用 <code>git config --local</code> 配置，针对某一工作目录</li></ul><p><strong>每一个级别会覆盖上一级别的配置</strong></p><h2 id="配置用户信息和文本编辑器">配置用户信息和文本编辑器</h2><p>用下面两条命令配置用户名和邮箱<br>用户名和邮箱会在每次提交的同时提交</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;你的用户名&quot;</span></span><br><span class="line">git config --global user.email 你的邮箱</span><br></pre></td></tr></table></figure><p>用下面的命令配置文本编辑器，在每次 git 需要你输入信息时，就会打开这个文本编辑器</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global core.editor vim</span><br></pre></td></tr></table></figure><p>配置完成后，可以通过一下命令查看配置信息</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --list</span><br></pre></td></tr></table></figure><p>当你不记得某些变量在哪里配置的时候，可以通过下面的命令查找</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --show-origin 变量名</span><br></pre></td></tr></table></figure><h2 id="获取帮助文档">获取帮助文档</h2><p>首先要安装 <code>man</code></p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> pacman -S man</span><br></pre></td></tr></table></figure><p>然后可以通过 <code>git help [verb]</code> 获取详细的帮助文档<br>也可以通过 <code>git [verb] -h</code> 获得简洁的帮助文档</p><h2 id="配置远端仓库">配置远端仓库</h2><h3 id="配置-SSH-密钥">配置 SSH 密钥</h3><p>首先要生成本机 ssh 密钥</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa</span><br></pre></td></tr></table></figure><p>这会在 <code>~/.ssh</code> 文件夹生成两个文件 <code>id_rsa</code> 和 <code>id_rsa.pub</code><br>我们将 <code>id_rsa.pub</code> 中的内容复制（注意这个是公钥，另一个自己保留）<br>然后进入 github/gitee，打开 设置 -&gt; SSH and GPG keys -&gt; New SSH key<br>在该页面中，将内容粘贴到 Key 文本框中，标题在粘贴时会自动生成，一般不用更改，Key type 一般也不用更改</p><p>通过下面的命令可以验证 SSH 密钥是否配置成功</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br><span class="line">ssh -T git@gitee.com</span><br></pre></td></tr></table></figure><blockquote><p>注意：若 ssh 命令不存在，可以手动下载 <code>sudo pacman -S openssh</code></p></blockquote><h3 id="创建和连接远端仓库">创建和连接远端仓库</h3><p>在 Github/Gitee 创建一个仓库</p><img src="/2025/08/20/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/ArchLinux/git/git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/git01.png" class="" title="创建仓库"><p>然后复制其 ssh 链接</p><img src="/2025/08/20/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/ArchLinux/git/git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/git02.png" class="" title="复制SSH链接"><p>在本地创建一个文件夹，然后在这个文件夹打开终端，输入下面的指令</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure><p>然后通过下面的命令是工作区与远端仓库建立连接</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add 远端仓库名 远端仓库的ssh地址</span><br></pre></td></tr></table></figure><p>其中，远端仓库名并不一定要与 Github 的仓库名相同，他只是作为本地连接到远端仓库的标识</p><h1>Git 常用指令</h1><h2 id="仓库的简单（常用）操作">仓库的简单（常用）操作</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git init <span class="comment"># 将当前目录设置为工作区（workplace）</span></span><br><span class="line">git add . <span class="comment"># 将工作区（workplace）文件都添加到暂存区（index/stage）</span></span><br><span class="line">git commit -m <span class="string">&#x27;提交信息&#x27;</span> <span class="comment"># 将暂存区的文件提交到仓库（repository）</span></span><br><span class="line">git push 远程仓库名 本地分支名:远端分支名</span><br></pre></td></tr></table></figure><h2 id="远端仓库的相关操作">远端仓库的相关操作</h2><p>利用下面的指令可以从远端克隆一个仓库</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">git <span class="built_in">clone</span> 链接 <span class="comment"># 直接克隆</span></span><br><span class="line">git <span class="built_in">clone</span> 链接 new_name <span class="comment"># 克隆并重命名</span></span><br></pre></td></tr></table></figure><h1>参考连接</h1><ul><li>安装 | Git官网：<a href="https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%AE%89%E8%A3%85-Git">https://git-scm.com/book/zh/v2/起步-安装-Git</a></li><li>文档 | Git官网：<a href="https://git-scm.com/book/zh/v2">https://git-scm.com/book/zh/v2</a></li></ul>]]></content>
       
       
+      <categories>
+          
+          <category> 计算机 </category>
+          
+          <category> Linux </category>
+          
+          <category> ArchLinux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 计算机 </tag>
+            
+            <tag> Git </tag>
+            
+            <tag> 配置 </tag>
+            
+            <tag> 教程 </tag>
+            
+            <tag> 笔记 </tag>
+            
+            <tag> Linux </tag>
+            
+        </tags>
       
     </entry>
     
