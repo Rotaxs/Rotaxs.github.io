@@ -22,15 +22,15 @@
       
         <tags>
             
+            <tag> Linux </tag>
+            
+            <tag> glob </tag>
+            
             <tag> 计算机 </tag>
             
             <tag> 教程 </tag>
             
             <tag> 笔记 </tag>
-            
-            <tag> Linux </tag>
-            
-            <tag> glob </tag>
             
         </tags>
       
@@ -39,7 +39,7 @@
     
     
     <entry>
-      <title>Git使用指南</title>
+      <title>Git基本使用指南（未完成）</title>
       <link href="/2025/08/20/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/ArchLinux/git/git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/"/>
       <url>/2025/08/20/%E8%AE%A1%E7%AE%97%E6%9C%BA/Linux/ArchLinux/git/git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</url>
       
@@ -59,17 +59,17 @@
       
         <tags>
             
+            <tag> Linux </tag>
+            
             <tag> 计算机 </tag>
-            
-            <tag> Git </tag>
-            
-            <tag> 配置 </tag>
             
             <tag> 教程 </tag>
             
             <tag> 笔记 </tag>
             
-            <tag> Linux </tag>
+            <tag> Git </tag>
+            
+            <tag> 配置 </tag>
             
         </tags>
       
