@@ -1,0 +1,71 @@
+- date: 2026-2-16 13:57:00
+  key: key-1
+  content: |
+    今天发现一个宝藏网站，[CS自学指南](https://csdiy.wiki/)
+    ![CS自学指南](/assets/shuoshuo/202602/PixPin_2026-02-16_14-37-23.png)
+  tags:
+    - 网站
+- date: 2026-2-16 15:57:21
+  key: key-2
+  content: |
+    又发现了一些 butterfly 的小功能  \
+    在本地跑博客，busuanzi 给我吓一跳😄（实际上目前 cloudflare 和 github 加起来的数据都不到 200） \
+    ![网站信息](/assets/shuoshuo/202602/PixPin_2026-02-16_15-59-37.png)
+  tags:
+    - butterfly
+    - 博客
+- date: 2026-2-16 17:15:49
+  key: key-3
+  content: |
+    用 Gemini 生成博客封面👍
+    ![网站图片](/assets/shuoshuo/202602/PixPin_2026-02-16_17-12-53.png)
+  tags:
+    - Gemini
+    - 博客
+- date: 2026-2-17 12:59:46
+  key: key-4
+  content: |
+    第一次直观体会到其他语言和 C/C++ 在速度和空间占用上的差距
+    ![C/C++ 和 Java 的比较](/assets/shuoshuo/202602/PixPin_2026-02-17_12-56-44.png)
+  tags:
+    - 洛谷
+    - 算法
+- date: 2026-2-23 15:28:23
+  key: key-5
+  content: |
+    在 Windows 上配置 vcpkg 太折磨了，没有 Visual Studio 就有各种问题。算了算了，毕竟以后工作大概也还是用 VS，慢慢的应该也就熟悉了
+  tags:
+    - Visual Studio
+    - Vcpkg
+- date: 2026-2-24 17:47:34
+  key: key-6
+  content: |
+    今天下定决心纠正打字手型了，目前看来还要一段时间适应
+    ![dazidazi](/assets/shuoshuo/202602/PixPin_2026-02-24_17-46-19.png)
+  tags:
+    - 打字
+- date: 2026-3-20 16:49:16
+  key: key-7
+  content: |
+    gpt 的这个表情很有意味
+    ![](/assets/shuoshuo/202603/PixPin_2026-03-20_16-47-41.png)
+  tags:
+    - gpt
+    - emoji
+- date: 2026-6-25 16:09:25
+  key: key-8
+  content: |
+    总结一下这个学期吧，这个学期算上 CSP 打了六场比赛
+    - ICPC 深圳邀请赛（打铁）
+    - ICPC 南昌邀请赛（打铁）
+    - ICPC/CCPC 重庆省赛（银牌）
+    - CQUT 程序设计大赛（第二）
+    - 天梯赛
+    - 第42次 CSP 认证
+
+    总的来说，这个学期参加的比赛较多，但是拿奖不多（感谢重庆省赛让我在期末拿了块牌子） \
+    暑假得加训了，希望下半年区域赛不会打铁
+  tags:
+    - ICPC
+    - 算法
+  
