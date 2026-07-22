@@ -4,7 +4,7 @@ date: 2025-12-30 11:11:08
 description: 本文主要介绍 C 语言中的标准 I/O
 series: C/C++
 tags: [计算机, C语言, I/O, 缓冲区, 输入流, 输出流]
-categories: [计算机, C语言]
+categories: [计算机, C/C++]
 cover: /assets/covers/clanguage.png
 ---
 
@@ -39,7 +39,7 @@ int __cdecl printf( const char * __restrict__ _Format,... );
 
 函数还有一个返回值，表示成功打印的字符总数，如果出错，会返回一个负数
 
-关于格式化字符，可以参考笔者的这篇文章 {% post_link 计算机/C语言/C语言中的格式化输出和转义字符/C语言中的格式化输出和转义字符 C语言中的格式化输出和转义字符 %}
+关于格式化字符，可以参考笔者的这篇文章 {% post_link 计算机/C-C++/C语言中的格式化输出和转义字符/C语言中的格式化输出和转义字符 C语言中的格式化输出和转义字符 %}
 
 有关格式化字符串，我们还可以了解下面两个函数
 

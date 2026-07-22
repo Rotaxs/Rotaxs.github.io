@@ -4,7 +4,7 @@ date: 2025-10-22 08:54:42
 description: 总结C语言中的格式化输出方式
 series: C/C++
 tags: [计算机, C语言]
-categories: [计算机, C语言]
+categories: [计算机, C/C++]
 cover: /assets/covers/clanguage.png
 ---
 
