@@ -295,7 +295,7 @@ aside:
       link: https://github.com/xxxxxx
   card_announcement:
     enable: true
-    content: 期末了，更点高数 # TODO
+    content: CSAPP # TODO
   card_recent_post:
     enable: false
     # If set 0 will show all
