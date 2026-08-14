@@ -39,10 +39,23 @@ category:
 
 custom_css:
   - /css/custom.css
+custom_js:
+  - /js/site-runtime.js
 font:  # 主题字体配置
   font_size: 16px        # 全局字号
   font_family:
   code_font_size: 85%    # 代码的字号
+
+footer:
+  content: '
+    <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a>
+    <i class="iconfont icon-love"></i>
+    <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a>
+    <br>
+    <span id="site-run-time">网站已运行 0 天</span>
+    <br>
+    <span id="site-total-words">博客总字数 0 字</span>
+  '
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
