@@ -3,18 +3,46 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Rotas's blogs
+title: Rotas's Blog
 subtitle: '今日无事可做'
 description: ''
 keywords:
   - '编程'
   - '数学'
-  - 'Python'
-  - 'ArchLinux'
   - 'C++'
 author: Rotas
 language: zh-CN
 timezone: 'Asia/Shanghai'
+navbar:
+  blog_title: Rotas's Blog
+  menu:
+    - { key: 'home', link: '/', icon: 'iconfont icon-home-fill' }
+    - { key: 'archives', link: '/archives/', icon: 'iconfont icon-note', name: '归档' }
+    - { key: 'tag', link: '/tags/', icon: 'iconfont icon-tags-fill', name: '标签' }
+    - { key: 'categories', link: '/categories/', icon: 'iconfont icon-books', name: '分类' }
+index:
+  slogan:
+    enable: true
+    text: 今日无事可做
+  post_sticky:
+    enable: true
+    icon: 'iconfont icon-top'
+  post_url_target: _blank
+  banner_img: /assets/website/banner3.jpg
+
+archive:
+  banner_img: /assets/website/banner1.jpg
+tag:
+  banner_img: /assets/website/banner1.jpg
+category:
+  banner_img: /assets/website/banner1.jpg
+
+custom_css:
+  - /css/custom.css
+font:  # 主题字体配置
+  font_size: 16px        # 全局字号
+  font_family:
+  code_font_size: 85%    # 代码的字号
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
@@ -52,17 +80,61 @@ render_drafts: false
 post_asset_folder: true
 relative_link: false
 future: true
-syntax_highlighter: highlight.js
-highlight:
-  line_number: true
-  auto_detect: false
-  tab_replace: ''
-  wrap: true
-  hljs: false
-prismjs:
-  preprocess: true
-  line_number: true
-  tab_replace: ''
+# syntax_highlighter: highlight.js
+# highlight:
+#   line_number: true
+#   auto_detect: false
+#   tab_replace: ''
+#   wrap: true
+#   hljs: false
+# prismjs:
+#   preprocess: true
+#   line_number: true_self
+#   tab_replace: ''
+
+post:
+  math:
+    enable: true
+    specific: true
+    engine: katex
+  mermaid:
+    enable: true
+    specific: true
+    options:
+  meta:
+    author:  # 作者，优先根据 front-matter 里 author 字段，其次是 hexo 配置中 author 值
+      enable: false
+    date:  # 文章日期，优先根据 front-matter 里 date 字段，其次是 md 文件日期
+      enable: true
+      format: "YYYY 年 MM 月 DD 日, dddd"  # 格式参照 ISO-8601 日期格式化
+      # format: "dddd, MMMM Do YYYY, h:mm"  # 格式参照 ISO-8601 日期格式化
+    wordcount:  # 字数统计
+      enable: true
+      format: "{} 字"  # 显示的文本，{}是数字的占位符（必须包含)，下同
+    min2read:  # 阅读时间
+      enable: true
+      format: "{} 分钟"
+    views:  # 阅读次数
+      enable: false
+      source: "leancloud"  # 统计数据来源，可选：leancloud | busuanzi | openkounter   注意不蒜子会间歇抽风
+      format: "{} 次"
+  banner_img: /assets/website/banner1.jpg
+  footnote:
+    enable: true
+    header: ''
+
+code:
+  copy_btn: true
+  highlight:
+    enable: true
+    line_number: true
+    lib: "prismjs"
+    highlightjs:
+      style: 'Github Gist'
+      bg_color: false
+    prismjs:
+      style: "default"
+      preprocess: true
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')

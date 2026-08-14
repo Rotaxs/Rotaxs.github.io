@@ -1,0 +1,6 @@
+/* 识别图片 URL 结尾带有 #small 的图片 */
+.post-content img[src$="#small"] {
+  max-width: 50% !important;
+  display: block;
+  margin: 1rem auto !important;
+}
