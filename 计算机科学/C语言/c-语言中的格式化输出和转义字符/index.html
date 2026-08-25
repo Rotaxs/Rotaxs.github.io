@@ -1,0 +1,1285 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Rotas">
+  <meta name="keywords" content="编程,数学,Python,ArchLinux,C++">
+  
+    <meta name="description" content="总结C语言中的格式化输出方式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C 语言中的格式化输出和转义字符">
+<meta property="og:url" content="http://rotaxs.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/C%E8%AF%AD%E8%A8%80/c-%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA%E5%92%8C%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6/">
+<meta property="og:site_name" content="Rotas&#39;s blogs">
+<meta property="og:description" content="总结C语言中的格式化输出方式">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://rotaxs.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/C%E8%AF%AD%E8%A8%80/c-%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA%E5%92%8C%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6/%E9%A2%9C%E8%89%B2.png">
+<meta property="article:published_time" content="2025-10-22T00:54:42.000Z">
+<meta property="article:modified_time" content="2026-08-25T08:26:06.671Z">
+<meta property="article:author" content="Rotas">
+<meta property="article:tag" content="计算机">
+<meta property="article:tag" content="C语言">
+<meta property="article:tag" content="格式化">
+<meta property="article:tag" content="转义字符">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://rotaxs.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/C%E8%AF%AD%E8%A8%80/c-%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA%E5%92%8C%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6/%E9%A2%9C%E8%89%B2.png">
+  
+  
+  
+  <title>C 语言中的格式化输出和转义字符 - Rotas&#39;s blogs</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"rotaxs.github.io","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Rotas&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content (desktop) -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-note"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-books"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile grid menu overlay -->
+<div id="mobile-grid-menu" class="d-lg-none">
+  <div class="mobile-grid-menu-inner">
+    <div class="container">
+      <div class="row">
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-home-fill"></i>
+                  <span>首页</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/archives/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-note"></i>
+                  <span>归档</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/tags/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-tags-fill"></i>
+                  <span>标签</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/categories/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-books"></i>
+                  <span>分类</span>
+                </div>
+              </a>
+            </div>
+          
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+            <a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-search"></i>
+                <span>搜索</span>
+              </div>
+            </a>
+          </div>
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn"
+               data-label-light="开灯"
+               data-label-dark="关灯">
+            <a href="javascript:;" aria-label="Color Toggle">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+                <span id="mobile-color-toggle-label">关灯</span>
+              </div>
+            </a>
+          </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/assets/website/banner1.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="C 语言中的格式化输出和转义字符"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-10-22 08:54" pubdate>
+          2025 年 10 月 22 日, 星期三
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          4.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          35 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">C 语言中的格式化输出和转义字符</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="格式化输出字符">格式化输出字符</h2>
+<h3 id="常用的格式化字符">常用的格式化字符</h3>
+<p>C 语言中的格式化输出字符如下</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">格式字符</th>
+<th style="text-align:center">类型</th>
+<th style="text-align:left">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>%[-][0][n]d</code></td>
+<td style="text-align:center"><code>int</code></td>
+<td style="text-align:left"><code>-</code> 表示左对齐，<code>n</code> 表示输出宽度，<code>0</code> 表示右对齐时用 <code>0</code> 补齐，左对齐时用空格补齐</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%c</code></td>
+<td style="text-align:center"><code>char</code></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%[-][0][n][.n]f</code></td>
+<td style="text-align:center"><code>float</code></td>
+<td style="text-align:left"><code>.n</code> 表示小数位位数，其余同<code>int</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%[-][0][n][.n]s</code></td>
+<td style="text-align:center"><code>char[]</code></td>
+<td style="text-align:left"><code>.n</code> 表示从左开始取 <code>n</code> 位，其余同<code>int</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%hd</code></td>
+<td style="text-align:center"><code>short</code></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%[#]o</code></td>
+<td style="text-align:center"><code>八进制整型</code></td>
+<td style="text-align:left"># 表示显示八进制前面的<code>0</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%[#]x</code></td>
+<td style="text-align:center"><code>十六进制整型</code></td>
+<td style="text-align:left"># 表示显示十六进制前面的<code>0x</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%hu</code></td>
+<td style="text-align:center"><code>unsigned short</code></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%ld</code>/<code>%Ld</code></td>
+<td style="text-align:center"><code>long</code></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%lld</code>/<code>%LLd</code></td>
+<td style="text-align:center"><code>long long</code></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%u</code></td>
+<td style="text-align:center"><code>unsigned int</code></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%ul</code>/<code>lu</code>/<code>UL</code>/<code>LU</code></td>
+<td style="text-align:center"><code>unsigned long int</code></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%ull</code>/<code>llu</code>/<code>ULL</code>/<code>LLU</code></td>
+<td style="text-align:center"><code>unsigned long long int</code></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%lf</code></td>
+<td style="text-align:center"><code>double</code></td>
+<td style="text-align:left">参数同上</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%e</code></td>
+<td style="text-align:center"><code>科学计数法</code></td>
+<td style="text-align:left">如 <code>1e2=1*10^2</code>，<code>2e-2=2*10^(-2)</code>，<code>0.5E+3=0.5*10^(3)</code></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%g</code></td>
+<td style="text-align:center"><code>自动判断使用f还是e</code></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%p</code></td>
+<td style="text-align:center"><code>point</code></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:center"><code>%%</code></td>
+<td style="text-align:center"></td>
+<td style="text-align:left">输出%</td>
+</tr>
+</tbody>
+</table>
+<h3 id="修饰符">* 修饰符</h3>
+<p>以格式化输出整数为例，如果想要动态地控制输出的整数的宽度，需要用到 <code>*</code> 修饰符</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> width <span class="token operator">=</span> <span class="token number">6</span><span class="token punctuation">,</span> precision <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">,</span> n <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token keyword">float</span> f <span class="token operator">=</span> <span class="token number">3.1415926</span><span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"######\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%0*d\n"</span><span class="token punctuation">,</span> width<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"%*.*f"</span><span class="token punctuation">,</span> width<span class="token punctuation">,</span> precision<span class="token punctuation">,</span> f<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<p>输出如下</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token comment">######</span>
+000001
+  <span class="token number">3.14</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div></figure>
+<h2 id="转义字符">转义字符</h2>
+<h3 id="常用的转义字符">常用的转义字符</h3>
+<p>一般的转义字符</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">转义序列</th>
+<th style="text-align:center">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>\n</code></td>
+<td style="text-align:center">换行</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\t</code></td>
+<td style="text-align:center">水平制表符</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\\</code></td>
+<td style="text-align:center">反斜杠</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\'</code></td>
+<td style="text-align:center">单引号</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\&quot;</code></td>
+<td style="text-align:center">双引号</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\r</code></td>
+<td style="text-align:center">光标回到当前行行首</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\b</code></td>
+<td style="text-align:center">退格</td>
+</tr>
+</tbody>
+</table>
+<p>一些案例</p>
+<p><strong>1. 用户交互</strong></p>
+<p>使用 <code>\b</code> 实现在横线上输入</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> num<span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"输入一个两位数：__\b\b"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>num<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div></figure>
+<p><strong>2.打印进度条</strong></p>
+<p>利用 <code>\r</code> 回到行首不断更新进度条</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;unistd.h></span> <span class="token comment">// 用于 usleep (微秒级暂停)</span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> total <span class="token operator">=</span> <span class="token number">50</span><span class="token punctuation">;</span> <span class="token comment">// 进度条总长度</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"开始下载...\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> total<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token comment">// \r 让光标回到行首</span>
+        <span class="token comment">// \033[32m 设置绿色</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\r["</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// 打印已完成的方块</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> i<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span>
+            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"="</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">// 打印未完成的空格</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> total <span class="token operator">-</span> i<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span>
+            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">" "</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// \033[0m 重置颜色，显示百分比</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"] %d%%"</span><span class="token punctuation">,</span> i <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// 强制刷新缓冲区，否则看不到动画</span>
+        <span class="token function">fflush</span><span class="token punctuation">(</span><span class="token constant">stdout</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token function">usleep</span><span class="token punctuation">(</span><span class="token number">50000</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 暂停 50 毫秒</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\e[0m"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\n下载完成！\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<p>编码相关</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">转义序列</th>
+<th style="text-align:center">作用</th>
+<th style="text-align:center">例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>\xhh</code></td>
+<td style="text-align:center">给定一个十六进制数，输出 ASCII 码表中其对应的字符</td>
+<td style="text-align:center"><code>\x41</code> 对应字符 A</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\ooo</code></td>
+<td style="text-align:center">给定一个八进制数，输出 ASCII 码表中其对应的字符</td>
+<td style="text-align:center"><code>\101</code> 对应字符 A</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>\uNNNN</code></td>
+<td style="text-align:center">输出对应 Unicode 表中对应的字符 <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Unicode%E5%AD%97%E7%AC%A6%E5%88%97%E8%A1%A8">参考 Wikipedia</a></td>
+<td style="text-align:center"><code>\u4f60</code> 对应汉字 你</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ANSI-转义序列">ANSI 转义序列</h3>
+<blockquote>
+<p><strong>ANSI 转义序列</strong>（ANSI Escape Sequences）是一系列以 <code>ESC</code>（ASCII 码 27，即 <code>\033</code> 或 <code>\x1B</code>）​​ 开头的控制字符序列</p>
+</blockquote>
+<p>所有的 ANSI 转义序列都始于一个特殊的字符：<code>ESC</code> (Escape，转义字符)。在编程语言中，它通常被表示为 <code>\e</code> (PHP, Bash) 或八进制的 <code>\033</code> (Python, C/C++)，其 ASCII 码为 27</p>
+<p>我们常用的 ANSI 转义序列都是 CSI 序列，CSI 序列由<code>ESC[</code>、若干个（包括 0 个）参数字节、中间字节、最终字节组成，各部分字节的范围如下</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">组成部分</th>
+<th style="text-align:center">字符范围</th>
+<th style="text-align:center">ASCII</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">参数字节</td>
+<td style="text-align:center"><code>0x30</code>-<code>0x3F</code></td>
+<td style="text-align:center"><code>0-9:;&lt; = &gt;?</code></td>
+</tr>
+<tr>
+<td style="text-align:center">中间字节</td>
+<td style="text-align:center"><code>0x20</code>-<code>0x2F</code></td>
+<td style="text-align:center">空格、<code>!&quot;#$%&amp;'()*+,-./</code></td>
+</tr>
+<tr>
+<td style="text-align:center">最终字节</td>
+<td style="text-align:center"><code>0x40</code>-<code>0x7E</code></td>
+<td style="text-align:center"><code>@A-Z[\]^\_a-z&#123;|&#125;~</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="控制颜色">控制颜色</h4>
+<p>用案例引入</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\e[30;47m这是黑字白底。\e[0m\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\e[1;34m这是粗体蓝色的文字。\e[0m\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div></figure>
+<p>在第一条语句中<code>\e[</code>表示启动 CSI 转义，<code>30</code>（参数字节）表示设置字体为黑色，<code>47</code>（参数字节）表示设置白底，<code>m</code>（最终字节）表示处理颜色，<code>\e[0m</code>中<code>0</code>表示重置所有状态</p>
+<p>第二条语句中，<code>1</code>表示粗体，<code>34</code>表示蓝色</p>
+<p>样式参数</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>1</code>：粗体/高亮</p>
+</li>
+<li class="lvl-2">
+<p><code>2</code>：减弱</p>
+</li>
+<li class="lvl-2">
+<p><code>3</code>：斜体</p>
+</li>
+<li class="lvl-2">
+<p><code>4</code>：下划线</p>
+</li>
+<li class="lvl-2">
+<p><code>7</code>：反向显示</p>
+</li>
+</ul>
+<p>常用的颜色参数如下</p>
+<p><img src="%E9%A2%9C%E8%89%B2.png" srcset="/img/loading.gif" lazyload alt="图一：颜色"></p>
+<h4 id="控制光标">控制光标</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>\e[r;cH</code>/<code>\e[r;cf</code>：将光标移动到整个终端的第<code>r</code>行第<code>c</code>列（绝对位置）</p>
+</li>
+<li class="lvl-2">
+<p><code>\e[H</code>：光标移动到左上角</p>
+</li>
+<li class="lvl-2">
+<p><code>\e[NA</code>：光标上移<code>N</code>行</p>
+</li>
+<li class="lvl-2">
+<p><code>\e[NB</code>：光标下移<code>N</code>行</p>
+</li>
+<li class="lvl-2">
+<p><code>\e[NC</code>：光标右移<code>N</code>列</p>
+</li>
+<li class="lvl-2">
+<p><code>\e[ND</code>：光标左移<code>N</code>列</p>
+</li>
+<li class="lvl-2">
+<p><code>\e[?25l</code>：隐藏光标</p>
+</li>
+<li class="lvl-2">
+<p><code>\e[?25h</code>：显示光标</p>
+</li>
+</ul>
+<p>比如可以实现一个加载动画（旋转）的效果</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;unistd.h></span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>spin <span class="token operator">=</span> <span class="token string">"|/-\\"</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\033[?25l"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 隐藏光标</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">20</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token comment">// %c 打印字符，\r 回到行首</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\r正在加载 %c "</span><span class="token punctuation">,</span> spin<span class="token punctuation">[</span>i <span class="token operator">%</span> <span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">fflush</span><span class="token punctuation">(</span><span class="token constant">stdout</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">usleep</span><span class="token punctuation">(</span><span class="token number">100000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\r加载完成！  \n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\033[?25h"</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 恢复光标</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<h4 id="清屏与清行">清屏与清行</h4>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>\e[2J</code>：清空屏幕（可以用 <code>\e[H\e[2J</code> 清除屏幕内容并设置光标）</p>
+</li>
+<li class="lvl-2">
+<p><code>\e[K</code>：清除行光标位置到行末尾的内容</p>
+</li>
+<li class="lvl-2">
+<p><code>\e[2K</code>：清除当前行（光标不会回到行首，可以用 <code>\r</code> 使光标回到行首）</p>
+</li>
+</ul>
+<h4 id="综合运用">综合运用</h4>
+<p><strong>1. 进阶进度条</strong></p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;unistd.h></span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> total <span class="token operator">=</span> <span class="token number">50</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 隐藏光标</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\033[?25l"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"正在同步数据...\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;=</span> total<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token keyword">float</span> percentage <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword">float</span><span class="token punctuation">)</span>i <span class="token operator">/</span> total <span class="token operator">*</span> <span class="token number">100</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// 清除当前行</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\r\033[K"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// i &lt; 20 用红色 (31)，i &lt; 40 用黄色 (33)，完成用绿色 (32)</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">&lt;</span> <span class="token number">20</span><span class="token punctuation">)</span>
+            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\033[31m"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">else</span> <span class="token keyword">if</span> <span class="token punctuation">(</span>i <span class="token operator">&lt;</span> <span class="token number">40</span><span class="token punctuation">)</span>
+            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\033[33m"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">else</span>
+            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\033[32m"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"["</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> i<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span>
+            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"█"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> total <span class="token operator">-</span> i<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span>
+            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">" "</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"] %.1f%%"</span><span class="token punctuation">,</span> percentage<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// 刷新缓冲区</span>
+        <span class="token function">fflush</span><span class="token punctuation">(</span><span class="token constant">stdout</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">usleep</span><span class="token punctuation">(</span><span class="token number">50000</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 50毫秒</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\n\033[32m✔ 同步完成！\033[0m\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 恢复光标</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\033[?25h"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 回复颜色</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\033[0m"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<p><strong>2. 终端弹球游戏</strong></p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;unistd.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">TRAIL_SIZE</span> <span class="token expression"><span class="token number">5</span> </span><span class="token comment">// 拖尾长度</span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">const</span> <span class="token keyword">int</span> width <span class="token operator">=</span> <span class="token number">50</span><span class="token punctuation">,</span> height <span class="token operator">=</span> <span class="token number">15</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> x <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> y <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> dx <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span> dy <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 记录历史坐标的数组</span>
+    <span class="token keyword">int</span> history_x<span class="token punctuation">[</span>TRAIL_SIZE<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">0</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    <span class="token keyword">int</span> history_y<span class="token punctuation">[</span>TRAIL_SIZE<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">0</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+
+    <span class="token comment">// 初始化：隐藏光标，清屏</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\033[?25l\033[2J"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> frame <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> frame <span class="token operator">&lt;</span> <span class="token number">300</span><span class="token punctuation">;</span> frame<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 擦除最旧的一个尾巴（变成空格）</span>
+        <span class="token comment">// 这里不用清屏是因为换成空格效率更高且效果更好</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>history_x<span class="token punctuation">[</span>TRAIL_SIZE <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+            <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\033[%d;%dH "</span><span class="token punctuation">,</span> history_y<span class="token punctuation">[</span>TRAIL_SIZE <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> history_x<span class="token punctuation">[</span>TRAIL_SIZE <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token comment">// 将历史坐标后移</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> TRAIL_SIZE <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">--</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            history_x<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> history_x<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+            history_y<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> history_y<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+        <span class="token punctuation">&#125;</span>
+        history_x<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> x<span class="token punctuation">;</span>
+        history_y<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> y<span class="token punctuation">;</span>
+
+        <span class="token comment">// 更新当前球的位置</span>
+        x <span class="token operator">+=</span> dx<span class="token punctuation">;</span>
+        y <span class="token operator">+=</span> dy<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>x <span class="token operator">&lt;=</span> <span class="token number">1</span> <span class="token operator">||</span> x <span class="token operator">>=</span> width<span class="token punctuation">)</span>
+            dx <span class="token operator">=</span> <span class="token operator">-</span>dx<span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span>y <span class="token operator">&lt;=</span> <span class="token number">1</span> <span class="token operator">||</span> y <span class="token operator">>=</span> height<span class="token punctuation">)</span>
+            dy <span class="token operator">=</span> <span class="token operator">-</span>dy<span class="token punctuation">;</span>
+
+        <span class="token comment">// 绘制拖尾（颜色由深变浅）</span>
+        <span class="token comment">// 232-255 是灰度，数字越大越亮</span>
+        <span class="token keyword">int</span> colors<span class="token punctuation">[</span>TRAIL_SIZE<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">250</span><span class="token punctuation">,</span> <span class="token number">245</span><span class="token punctuation">,</span> <span class="token number">240</span><span class="token punctuation">,</span> <span class="token number">236</span><span class="token punctuation">,</span> <span class="token number">233</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> TRAIL_SIZE<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+        <span class="token punctuation">&#123;</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>history_x<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+            <span class="token punctuation">&#123;</span>
+                <span class="token comment">// 5 表示缓慢闪烁</span>
+                <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\033[%d;%dH\033[38;5;%dm·"</span><span class="token punctuation">,</span> history_y<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> history_x<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">,</span> colors<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">&#125;</span>
+        <span class="token punctuation">&#125;</span>
+
+        <span class="token comment">// 绘制当前的球（高亮白色）</span>
+        <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\033[%d;%dH\033[1;37mO\033[0m"</span><span class="token punctuation">,</span> y<span class="token punctuation">,</span> x<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token function">fflush</span><span class="token punctuation">(</span><span class="token constant">stdout</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">usleep</span><span class="token punctuation">(</span><span class="token number">40000</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 40ms 帧率更高更平滑</span>
+    <span class="token punctuation">&#125;</span>
+
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"\033[%d;1H\033[?25h游戏结束！\n"</span><span class="token punctuation">,</span> height <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<h2 id="参考链接">参考链接</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/ANSI%E8%BD%AC%E4%B9%89%E5%BA%8F%E5%88%97">Wikipedia</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/shanxuanang/article/details/149450865">CSDN</a></p>
+</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/" class="category-chain-item">计算机科学</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/C%E8%AF%AD%E8%A8%80/" class="category-chain-item">C语言</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/computer/" class="print-no-link">#计算机</a>
+      
+        <a href="/tags/C%E8%AF%AD%E8%A8%80/" class="print-no-link">#C语言</a>
+      
+        <a href="/tags/%E6%A0%BC%E5%BC%8F%E5%8C%96/" class="print-no-link">#格式化</a>
+      
+        <a href="/tags/%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6/" class="print-no-link">#转义字符</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>C 语言中的格式化输出和转义字符</div>
+      <div>http://rotaxs.github.io/计算机科学/C语言/c-语言中的格式化输出和转义字符/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Rotas</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年10月22日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/math/%E5%BE%AE%E7%A7%AF%E5%88%86/%E6%94%B6%E9%9B%86%E4%B8%80%E4%BA%9B%E8%BE%83%E9%9A%BE%E7%9A%84%E6%9E%81%E9%99%90%E9%A2%98/" title="收集一些较难的极限题">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">收集一些较难的极限题</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/Linux/git%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/" title="Git使用指南">
+                        <span class="hidden-mobile">Git使用指南</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <br> <span id="site-run-time">网站已运行 0 天</span> <br> <span id="site-total-words">博客总字数 119,164 字</span> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    function isExpandAllEnabled() {
+      return CONFIG.toc && CONFIG.toc.expand_all === true;
+    }
+    function expandAllToc() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .tocbot-is-collapsed').removeClass('tocbot-is-collapsed');
+    }
+    function updateTocToggle($li, $childList) {
+      var $toggle = $li.children('.toc-toggle');
+      if ($toggle.length === 0) { return; }
+      var collapsed = $childList.hasClass('tocbot-is-collapsed');
+      $toggle
+        .toggleClass('toc-toggle-collapsed', collapsed)
+        .toggleClass('toc-toggle-expanded', !collapsed);
+    }
+    function bindTocToggle() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .toc-list-item').each(function() {
+        var $li = jQuery(this);
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) {
+          if ($li.children('.toc-toggle').length === 0) {
+            $li.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>');
+          }
+          return;
+        }
+
+        if ($li.children('.toc-toggle').length === 0) {
+          $li.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>');
+        }
+        updateTocToggle($li, $childList);
+      });
+      jQuery('#toc-body').off('click.tocToggle').on('click.tocToggle', '.toc-toggle', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $li = jQuery(this).parent('.toc-list-item');
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) { return; }
+        $childList.toggleClass('tocbot-is-collapsed');
+        updateTocToggle($li, $childList);
+      });
+      if (!window.__tocToggleObserver) {
+        window.__tocToggleObserver = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.type !== 'attributes' || mutation.attributeName !== 'class') { return; }
+            var $list = jQuery(mutation.target);
+            var $li = $list.parent('.toc-list-item');
+            if ($li.length === 0) { return; }
+            updateTocToggle($li, $list);
+          });
+        });
+        jQuery('#toc-body ol').each(function() {
+          window.__tocToggleObserver.observe(this, { attributes: true });
+        });
+      }
+    }
+    var tocConfig = Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc);
+    if (isExpandAllEnabled()) {
+      tocConfig.collapseDepth = 6;
+    }
+    window.tocbot.init(tocConfig);
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+    expandAllToc();
+    bindTocToggle();
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+        expandAllToc();
+        bindTocToggle();
+      }
+    });
+  });
+</script>
+
+
+  <script  src="https://lib.baomitu.com/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" ></script>
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="/js/site-runtime.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

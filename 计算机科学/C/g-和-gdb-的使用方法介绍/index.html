@@ -1,0 +1,1199 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Rotas">
+  <meta name="keywords" content="编程,数学,Python,ArchLinux,C++">
+  
+    <meta name="description" content="本文介绍如何使用 g++ 编译 C++ 源文件，最后再">
+<meta property="og:type" content="article">
+<meta property="og:title" content="g++ 和 gdb 的使用方法介绍">
+<meta property="og:url" content="http://rotaxs.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/C/g-%E5%92%8C-gdb-%E7%9A%84%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%E4%BB%8B%E7%BB%8D/">
+<meta property="og:site_name" content="Rotas&#39;s blogs">
+<meta property="og:description" content="本文介绍如何使用 g++ 编译 C++ 源文件，最后再">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-08-25T08:42:47.000Z">
+<meta property="article:modified_time" content="2026-08-25T09:21:06.528Z">
+<meta property="article:author" content="Rotas">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="g++">
+<meta property="article:tag" content="gdb">
+<meta property="article:tag" content="nm">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>g++ 和 gdb 的使用方法介绍 - Rotas&#39;s blogs</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"rotaxs.github.io","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Rotas&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content (desktop) -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-note"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-books"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile grid menu overlay -->
+<div id="mobile-grid-menu" class="d-lg-none">
+  <div class="mobile-grid-menu-inner">
+    <div class="container">
+      <div class="row">
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-home-fill"></i>
+                  <span>首页</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/archives/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-note"></i>
+                  <span>归档</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/tags/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-tags-fill"></i>
+                  <span>标签</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/categories/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-books"></i>
+                  <span>分类</span>
+                </div>
+              </a>
+            </div>
+          
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+            <a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-search"></i>
+                <span>搜索</span>
+              </div>
+            </a>
+          </div>
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn"
+               data-label-light="开灯"
+               data-label-dark="关灯">
+            <a href="javascript:;" aria-label="Color Toggle">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+                <span id="mobile-color-toggle-label">关灯</span>
+              </div>
+            </a>
+          </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/assets/website/banner1.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="g++ 和 gdb 的使用方法介绍"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-08-25 16:42" pubdate>
+          2026 年 08 月 25 日, 星期二
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          34 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">g++ 和 gdb 的使用方法介绍</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="CPP-编译流程">CPP 编译流程</h2>
+<p>预处理 -&gt; 编译 -&gt; 汇编 -&gt; 链接</p>
+<h3 id="预处理">预处理</h3>
+<p>删除注释，并处理所有的以 <code>#</code> 开头的预处理指令，进行文本层面的替换与扩展</p>
+<p>最终得到的 <code>main.i</code> 是替换后的纯 C++ 文本</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">g++ <span class="token parameter variable">-E</span> main.cpp <span class="token parameter variable">-o</span> main.i<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+<h3 id="编译">编译</h3>
+<p>将 C++ 文本编译为相应平台（CPU 可读）的汇编指令</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">g++ <span class="token parameter variable">-S</span> main.i <span class="token parameter variable">-o</span> main.s<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+<h3 id="汇编">汇编</h3>
+<p>使用汇编器将汇编代码转为机器码（不可执行，可能缺少系统库，内存也不是真的内存）</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">g++ <span class="token parameter variable">-c</span> main.s <span class="token parameter variable">-o</span> main.o<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+<h3 id="链接">链接</h3>
+<p>将多个目标文件以及系统静态库，动态库合并，形成完整地址布局的二进制文件</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">g++ main.o <span class="token parameter variable">-o</span> main<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+<h2 id="编译常用参数">编译常用参数</h2>
+<h3 id="输入和输出文件-o，-c">输入和输出文件 <code>-o</code>，<code>-c</code></h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>-o</code>：指定输出文件名</p>
+</li>
+<li class="lvl-2">
+<p><code>-c</code>：将指定文件编译为临时机器码，如 <code>g++ -c main.cpp -o main.o</code></p>
+</li>
+</ul>
+<p>注意如果是直接得到可执行程序，不需要加 <code>-c</code></p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">g++ main.cpp <span class="token parameter variable">-o</span> main<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+<h3 id="指定头文件所在目录-I">指定头文件所在目录 <code>-I</code></h3>
+<p>一般情况下<strong>编译器会直接在源代码的同一级目录找头文件</strong>，当用 <code>-I</code> 指定头文件目录后，编译器就可以在指定目录找头文件，</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">g++ -I./include src/main.cpp <span class="token parameter variable">-o</span> main<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+<p>如果有多个头文件目录（如有第三方库）</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">g++ -I./include -I./third_party/spdlog/include src/main.cpp <span class="token parameter variable">-o</span> main<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+<h3 id="指定库文件-L-l">指定库文件 <code>-L</code>/<code>-l</code></h3>
+<p>一般情况下，如果要用到链接库，（Linux 系统）会直接到 <code>/usr/lib</code> 或 <code>/lib</code> 目录下寻找</p>
+<p>如果链接库不在这里，就需要手动指定<strong>链接库目录</strong></p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">g++ main.o -L./third_paty/lib <span class="token parameter variable">-o</span> main<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+<p>在 Linux 中，库名一般是 <code>lib&lt;动态库名&gt;.so</code>/<code>lib&lt;静态库名&gt;.a</code>，在给 <code>-l</code> 传参数时，必须省去开头的 <code>lib</code> 和结尾的后缀</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">实际库名</th>
+<th style="text-align:center"><code>-l</code> 参数</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>libm.so</code>/<code>libm.a</code></td>
+<td style="text-align:center"><code>-lm</code></td>
+<td style="text-align:center">链接数学库</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>libpthread.so</code></td>
+<td style="text-align:center"><code>-lpthread</code></td>
+<td style="text-align:center">链接 POSIX 线程库</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>libssl.so</code></td>
+<td style="text-align:center"><code>-lssl</code></td>
+<td style="text-align:center">链接 OpsnSSL 库</td>
+</tr>
+</tbody>
+</table>
+<p>比如项目的目录为</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-text" data-language="text"><code class="language-text">my_project/
+├── lib/
+│   └── libcalculator.so  &lt;-- 动态库文件
+└── src/
+    └── main.cpp          &lt;-- 源码<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">g++ src/main.cpp -L./lib <span class="token parameter variable">-lcalcualtor</span> <span class="token parameter variable">-o</span> main<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+<p>如果存在同名的动态库和静态库，会优先使用静态库</p>
+<p>但是可以通过，<code>-Wl,-Bstatic</code> 和 <code>-Wl,-Bdynamic</code> 指定后面使用静态库/动态库</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">g++ main.c -Wl,-Bstatic <span class="token parameter variable">-lfoo</span> -Wl,-Bdynamic <span class="token parameter variable">-lbar</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+<h3 id="指定-C-语言标准-std">指定 C++ 语言标准 <code>-std=</code></h3>
+<p><code>std=c++11</code> 表示使用 C++11 标准，类似的还有 <code>c++14</code>,<code>c++17</code>,<code>c++20</code>,<code>c++23</code></p>
+<p>以上这些都是 ISO C++ 标准，如果要使用 GCC 特有的标准，可以使用 <code>gnu++17</code> 等</p>
+<h3 id="添加警告-Wall-Wextra-Wpedantic">添加警告 <code>-Wall -Wextra -Wpedantic</code></h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>-Wall</code>：即 <code>Warning All</code>，开启最常用的基础警告</p>
+<ul class="lvl-2">
+<li class="lvl-5"><code>if (x == 0)</code> 写成了 <code>if (x = 0)</code> <code>-Wparentheses</code></li>
+<li class="lvl-5">定义了但从未使用的变量 <code>-Wunused-variable</code></li>
+<li class="lvl-5">有返回值的函数没写 <code>return</code> <code>-Wreturn-type</code></li>
+</ul>
+</li>
+<li class="lvl-2">
+<p><code>-Wextra</code>：在 <code>-Wall</code> 的基础上开启更深层的警告</p>
+<ul class="lvl-2">
+<li class="lvl-4">有符号整型和无符号整型比较 <code>-Wsign-compare</code></li>
+<li class="lvl-4">函数定义了形参但是未使用 <code>-Wunused-parameter</code></li>
+<li class="lvl-4"><code>if-else</code> 分支体为空 <code>-Wempty-body</code></li>
+<li class="lvl-4">结构体或类初始化时遗漏部分字段 <code>-Wmissing-field-initializers</code></li>
+</ul>
+</li>
+<li class="lvl-2">
+<p><code>-Wpedantic</code>：严格遵守 ISO C/C++ 标准</p>
+<ul class="lvl-2">
+<li class="lvl-4">使用了变长数组（VLA）</li>
+<li class="lvl-4">使用了 0 长度的数组</li>
+<li class="lvl-4">使用了当前标准已废弃的语法</li>
+</ul>
+</li>
+</ul>
+<p>这些只是警告，仍然可以编译（只是在编译时显示警告）</p>
+<p>使用 <code>-Werror</code> 可以将警告上升为错误（可以用 <code>echo &amp;?</code> 查看退出码）</p>
+<h2 id="启动-gdb">启动 gdb</h2>
+<p>如果要使用 gdb 调试，在编译源码时最好加上 <code>-g</code> 参数</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">g++ <span class="token parameter variable">-g</span> main.cpp <span class="token parameter variable">-o</span> main<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+<p>这个参数可以使得调试器能够查看源代码，方便我们调试</p>
+<p>然后就可以用 gdb 调试了</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">gdb main<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+<h2 id="使用-gdb">使用 gdb</h2>
+<h3 id="断点">断点</h3>
+<p><strong>添加断点</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类型</th>
+<th style="text-align:center">语法</th>
+<th style="text-align:center">示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">按行号</td>
+<td style="text-align:center"><code>b &lt;line&gt;</code>/<code>b &lt;file&gt;:&lt;line&gt;</code></td>
+<td style="text-align:center"><code>b 5</code>/<code>b main:5</code></td>
+</tr>
+<tr>
+<td style="text-align:center">按函数名</td>
+<td style="text-align:center"><code>b &lt;function&gt;</code>/<code>b &lt;class&gt;::&lt;function&gt;</code></td>
+<td style="text-align:center"><code>b main</code></td>
+</tr>
+<tr>
+<td style="text-align:center">按条件</td>
+<td style="text-align:center"><code>b &lt;line/function&gt; if &lt;condition&gt;</code></td>
+<td style="text-align:center"><code>b 4 if i == 100</code></td>
+</tr>
+</tbody>
+</table>
+<p>注意添加断点是断在执行当前语句之前</p>
+<p><strong>查看所有断点</strong></p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">info <span class="token builtin class-name">break</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+<figure><div class="code-wrapper"><pre class="line-numbers language-text" data-language="text"><code class="language-text">(gdb) info break
+Num     Type           Disp Enb Address            What
+1       breakpoint     keep y   0x0000000000001195 in func() at gdb_test.cpp:4
+2       breakpoint     keep y   0x00000000000011f0 in main() at gdb_test.cpp:11<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<p><strong>删除断点</strong></p>
+<p>使用 <code>d &lt;n&gt;</code> 删除对应编号的断点，编号可以通过 <code>info break</code> 查看</p>
+<p>直接输入 <code>d</code> 会清空所有断点</p>
+<p><strong>启用/禁用断点</strong></p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">diable <span class="token operator">&lt;</span>n<span class="token operator">></span>
+<span class="token builtin class-name">enable</span> <span class="token operator">&lt;</span>n<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div></figure>
+<p><strong>观察数据点</strong></p>
+<p>当某个变量或内存地址发生改变时自动暂停程序</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">watch</span> variable<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+<h3 id="控制运行">控制运行</h3>
+<p>使用 <code>run</code>/<code>r</code> 可以从头开始调试，使用 <code>kill</code>/<code>k</code> 可以终止当前正在调试的程序</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">指令</th>
+<th style="text-align:center">缩写</th>
+<th style="text-align:center">行为</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>next</code></td>
+<td style="text-align:center"><code>n</code></td>
+<td style="text-align:center">单步执行（不进入函数）</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>step</code></td>
+<td style="text-align:center"><code>s</code></td>
+<td style="text-align:center">单步执行（进入函数）</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>continue</code></td>
+<td style="text-align:center"><code>c</code></td>
+<td style="text-align:center">恢复程序正常运行，直到遇到下一个断点</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>finish</code></td>
+<td style="text-align:center"><code>f</code></td>
+<td style="text-align:center">运行至当前函数结束</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>until</code></td>
+<td style="text-align:center"><code>u</code></td>
+<td style="text-align:center">运行至指定位置（行）/跳出循环</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>直接回车默认执行上一条命令</p>
+</blockquote>
+<p><code>start</code> 也可以启动调试，只不过 <code>start</code> 会默认在 <code>main</code> 函数打一个断点，然后执行 <code>r</code></p>
+<p>使用 <code>list</code> 可以显示源码的上下文</p>
+<h3 id="输出变量和内存地址">输出变量和内存地址</h3>
+<p>使用 <code>print</code>/<code>p</code> 即可输出变量的值</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">p val<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>p/x val</code> 按十六进制输出</p>
+</li>
+<li class="lvl-2">
+<p><code>p/t val</code> 按二进制输出</p>
+</li>
+<li class="lvl-2">
+<p><code>p/c val</code> 按字符输出</p>
+</li>
+</ul>
+<p>使用 <code>display</code> 可以在每次单步执行后自动打印该变量</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">display val<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+<p>使用 <code>info display</code> 可以查看所有监视项</p>
+<p>如果要查看内存，直接用取地址运算符 <code>&amp;</code> 即可</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">p <span class="token operator">&amp;</span>val<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+<p>直接查看裸内存</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">x/<span class="token operator">&lt;</span>n<span class="token operator">></span><span class="token operator">&lt;</span>f<span class="token operator">></span><span class="token operator">&lt;</span>u<span class="token operator">></span> <span class="token operator">&lt;</span>pointer<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>&lt;n&gt;</code> 要查看的单元数量</p>
+</li>
+<li class="lvl-2">
+<p><code>&lt;f&gt;</code> 格式 <code>x</code> 十六进制 <code>d</code> 十进制 <code>s</code> 字符串 <code>i</code> 汇编指令</p>
+</li>
+<li class="lvl-2">
+<p><code>&lt;u&gt;</code> 单位大小 <code>b</code> 1字节 <code>h</code> 2字节 <code>w</code> 4字节 <code>g</code> 8字节</p>
+</li>
+</ul>
+<p>示例</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>x/5dw arr</code> 查看从数组 <code>arr</code> 开头的连续 5 个 4 字节的十进制整数</p>
+</li>
+<li class="lvl-2">
+<p><code>x/4xb &amp;val</code> 按 1 字节独立打印 <code>val</code> 占用的 4 字节</p>
+</li>
+<li class="lvl-2">
+<p><code>x/s std_ptr</code> 将 <code>str_ptr</code> 当作 C 风格字符串打印直到遇到 <code>\0</code> 结束</p>
+</li>
+</ul>
+<h3 id="查看栈调用">查看栈调用</h3>
+<p>使用 <code>bt</code> 可以查看栈调用</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-text" data-language="text"><code class="language-text">(gdb) bt
+#0  func () at gdb_test.cpp:6
+#1  0x00005555555551f5 in main () at gdb_test.cpp:13<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></div></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>bt full</code> 查看完整的调用栈信息</p>
+</li>
+<li class="lvl-2">
+<p><code>bt &lt;N&gt;</code> 打印最内层的 <code>N</code> 个栈帧</p>
+</li>
+<li class="lvl-2">
+<p><code>bt -&lt;N&gt;</code> 打印最外层的 <code>N</code> 个栈帧（和 <code>main</code> 靠近的）</p>
+</li>
+</ul>
+<h2 id="gdb-调试流程">gdb 调试流程</h2>
+<ol>
+<li class="lvl-3">
+<p>现象：捕获与还原现场，用 <code>run</code> 跑出控制台输出</p>
+</li>
+<li class="lvl-3">
+<p>根因：精准定位漏洞源头，使用 <code>bt</code> 查调用栈和局部变量，<code>x/p</code> 查看内存和指针合法性</p>
+</li>
+<li class="lvl-3">
+<p>修复：编写并应用修复代码</p>
+</li>
+<li class="lvl-3">
+<p>回归：验证生效且无侧效应</p>
+</li>
+</ol>
+<h2 id="nm-工具">nm 工具</h2>
+<p>nm 是 Linux 下一个用来查看二进制文件符号表的命令行工具</p>
+<p>可以用来查看在目标文件（.o）、静态库（.a）、动态库（.so）以及可执行程序中的函数和全局变量</p>
+<p>当运行 <code>nm nmTest.o</code> 时，每一行通常包含三列</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-text" data-language="text"><code class="language-text">地址/偏移量        类型代码  符号（函数名或变量名）
+0000000000000000 T        _Z3addii<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div></figure>
+<h3 id="类型代码">类型代码</h3>
+<p>大写一般表示全局/外部符号，即可以被其他文件或库引用的符号，小写一般表示静态/内部符号，即今在当前文件可以被访问的符号</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">代码</th>
+<th style="text-align:center">全称含义</th>
+<th style="text-align:center">内存区域</th>
+<th style="text-align:center">常见对应的代码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>T</code>/<code>t</code></td>
+<td style="text-align:center">Text</td>
+<td style="text-align:center">代码段</td>
+<td style="text-align:center">普通函数定义，<code>T</code> 为全局函数，<code>t</code> 为静态函数</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>U</code></td>
+<td style="text-align:center">Undefined</td>
+<td style="text-align:center">不占用空间</td>
+<td style="text-align:center">当前文件只调用该符号，但是没有实现，等待链接器在外部补齐</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>D</code>/<code>d</code></td>
+<td style="text-align:center">Data</td>
+<td style="text-align:center">已初始化的数据段（<code>.data</code>）</td>
+<td style="text-align:center">初始值不为 0 的全局变量或静态变量</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>B</code>/<code>b</code></td>
+<td style="text-align:center">BSS</td>
+<td style="text-align:center">未初始化的数据段（<code>.bss</code>）</td>
+<td style="text-align:center">未初始化或初始化为 0 的全局变量或 static 变量</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>R</code>/<code>r</code></td>
+<td style="text-align:center">Read-Only</td>
+<td style="text-align:center">只读数据段（<code>.rodata</code>）</td>
+<td style="text-align:center"><code>const</code> 全局变量、字符串字面量</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>W</code>/<code>w</code></td>
+<td style="text-align:center">Weak</td>
+<td style="text-align:center">代码段/数据段</td>
+<td style="text-align:center">常见于 inline 函数或模板实例化，允许多处定义且不报冲突</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>C</code></td>
+<td style="text-align:center">Common</td>
+<td style="text-align:center">未初始化公共段</td>
+<td style="text-align:center">未初始化的 C 风格全局变量（在最终链接阶段会被合并并转入 BSS 段）</td>
+</tr>
+</tbody>
+</table>
+<figure><div class="code-wrapper"><pre class="line-numbers language-cpp" data-language="cpp"><code class="language-cpp"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;iostream></span></span>
+
+<span class="token keyword">const</span> <span class="token keyword">int</span> g_const_val <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span>     <span class="token comment">// R : 全局 const 变量 -> 只读数据段 (Read-Only)</span>
+<span class="token keyword">int</span> g_init_val <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>              <span class="token comment">// D : 已初始化且非零 -> 数据段 (Data)</span>
+<span class="token keyword">int</span> g_zero_val <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>              <span class="token comment">// B : 初始化为零 -> BSS 段</span>
+<span class="token keyword">int</span> g_uninit_val<span class="token punctuation">;</span>                <span class="token comment">// B : 未初始化 -> BSS 段 (或 C)</span>
+
+<span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">inner_func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>      <span class="token comment">// t : static 函数 -> 局部代码段 (小写 t)</span>
+<span class="token keyword">void</span> <span class="token function">global_func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>            <span class="token comment">// T : 普通全局函数 -> 全局代码段 (大写 T)</span>
+
+<span class="token keyword">inline</span> <span class="token keyword">void</span> <span class="token function">inline_func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span><span class="token punctuation">&#125;</span>     <span class="token comment">// W : 内联函数 -> 弱代码段 (Weak)</span>
+
+<span class="token keyword">void</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">&#123;</span>
+    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"Hi"</span><span class="token punctuation">;</span>           <span class="token comment">// U : std::cout 等外部符号 -> 未定义 (Undefined)</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<h3 id="常用参数">常用参数</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>-C</code>：还原 C++ 名字（即将列出的符号部分的“乱码”翻译为 C++ 变量名/函数名）</p>
+</li>
+<li class="lvl-2">
+<p><code>-u</code>：只看未定义符号</p>
+</li>
+<li class="lvl-2">
+<p><code>-g</code>：只显示全局/外部符号</p>
+</li>
+<li class="lvl-2">
+<p><code>-D</code>：查看动态符号表，一般用来查看 <code>.so</code> 文件</p>
+</li>
+<li class="lvl-2">
+<p><code>-A</code>：显示所属文件名</p>
+</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/" class="category-chain-item">计算机科学</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/C/" class="category-chain-item">C++</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/C/" class="print-no-link">#C++</a>
+      
+        <a href="/tags/g/" class="print-no-link">#g++</a>
+      
+        <a href="/tags/gdb/" class="print-no-link">#gdb</a>
+      
+        <a href="/tags/nm/" class="print-no-link">#nm</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>g++ 和 gdb 的使用方法介绍</div>
+      <div>http://rotaxs.github.io/计算机科学/C/g-和-gdb-的使用方法介绍/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Rotas</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年8月25日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/C/%E7%94%A8-ftxui-%E5%9C%A8-c-%E4%B8%AD%E5%AE%9E%E7%8E%B0-tui/" title="用 Ftxui 在 C++ 中实现 tui">
+                        <span class="hidden-mobile">用 Ftxui 在 C++ 中实现 tui</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  <script>
+  Fluid.utils.createScript('https://lib.baomitu.com/mermaid/8.14.0/mermaid.min.js', function() {
+    mermaid.initialize({});
+
+    Fluid.utils.listenDOMLoaded(function() {
+      Fluid.events.registerRefreshCallback(function() {
+        if ('mermaid' in window) {
+          mermaid.init();
+        }
+      });
+    });
+  });
+</script>
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <br> <span id="site-run-time">网站已运行 0 天</span> <br> <span id="site-total-words">博客总字数 119,164 字</span> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    function isExpandAllEnabled() {
+      return CONFIG.toc && CONFIG.toc.expand_all === true;
+    }
+    function expandAllToc() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .tocbot-is-collapsed').removeClass('tocbot-is-collapsed');
+    }
+    function updateTocToggle($li, $childList) {
+      var $toggle = $li.children('.toc-toggle');
+      if ($toggle.length === 0) { return; }
+      var collapsed = $childList.hasClass('tocbot-is-collapsed');
+      $toggle
+        .toggleClass('toc-toggle-collapsed', collapsed)
+        .toggleClass('toc-toggle-expanded', !collapsed);
+    }
+    function bindTocToggle() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .toc-list-item').each(function() {
+        var $li = jQuery(this);
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) {
+          if ($li.children('.toc-toggle').length === 0) {
+            $li.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>');
+          }
+          return;
+        }
+
+        if ($li.children('.toc-toggle').length === 0) {
+          $li.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>');
+        }
+        updateTocToggle($li, $childList);
+      });
+      jQuery('#toc-body').off('click.tocToggle').on('click.tocToggle', '.toc-toggle', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $li = jQuery(this).parent('.toc-list-item');
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) { return; }
+        $childList.toggleClass('tocbot-is-collapsed');
+        updateTocToggle($li, $childList);
+      });
+      if (!window.__tocToggleObserver) {
+        window.__tocToggleObserver = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.type !== 'attributes' || mutation.attributeName !== 'class') { return; }
+            var $list = jQuery(mutation.target);
+            var $li = $list.parent('.toc-list-item');
+            if ($li.length === 0) { return; }
+            updateTocToggle($li, $list);
+          });
+        });
+        jQuery('#toc-body ol').each(function() {
+          window.__tocToggleObserver.observe(this, { attributes: true });
+        });
+      }
+    }
+    var tocConfig = Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc);
+    if (isExpandAllEnabled()) {
+      tocConfig.collapseDepth = 6;
+    }
+    window.tocbot.init(tocConfig);
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+    expandAllToc();
+    bindTocToggle();
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+        expandAllToc();
+        bindTocToggle();
+      }
+    });
+  });
+</script>
+
+
+  <script  src="https://lib.baomitu.com/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" ></script>
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="/js/site-runtime.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

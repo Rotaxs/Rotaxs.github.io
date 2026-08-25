@@ -1,0 +1,1621 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Rotas">
+  <meta name="keywords" content="编程,数学,Python,ArchLinux,C++">
+  
+    <meta name="description" content="本文写给刚刚接触电脑的读者，帮助他们快速掌握 Windows11 电脑的基本常识">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机常识（Windows 11）">
+<meta property="og:url" content="http://rotaxs.github.io/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/">
+<meta property="og:site_name" content="Rotas&#39;s blogs">
+<meta property="og:description" content="本文写给刚刚接触电脑的读者，帮助他们快速掌握 Windows11 电脑的基本常识">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://rotaxs.github.io/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E4%B8%AA%E6%80%A7%E5%8C%96%E8%AE%BE%E7%BD%AE.png">
+<meta property="og:image" content="http://rotaxs.github.io/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E5%9B%BE%E6%A0%87%E8%AE%BE%E7%BD%AE.png">
+<meta property="og:image" content="http://rotaxs.github.io/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E7%A1%AC%E4%BB%B6%E5%8F%82%E6%95%B0.png">
+<meta property="og:image" content="http://rotaxs.github.io/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E7%B3%BB%E7%BB%9F%E5%8F%82%E6%95%B0.png">
+<meta property="og:image" content="http://rotaxs.github.io/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E6%96%87%E4%BB%B6%E5%A4%B9.png">
+<meta property="og:image" content="http://rotaxs.github.io/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E7%94%A8%E6%88%B7%E6%96%87%E4%BB%B6%E5%A4%B9.png">
+<meta property="og:image" content="http://rotaxs.github.io/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E4%BB%BB%E5%8A%A1%E6%A0%8F.png">
+<meta property="og:image" content="http://rotaxs.github.io/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F.png">
+<meta property="og:image" content="http://rotaxs.github.io/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E6%96%87%E4%BB%B6%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E5%99%A8.png">
+<meta property="og:image" content="http://rotaxs.github.io/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%99%A8.png">
+<meta property="og:image" content="http://rotaxs.github.io/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E5%8D%B8%E8%BD%BD%E8%BD%AF%E4%BB%B6.png">
+<meta property="og:image" content="http://rotaxs.github.io/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E9%A9%B1%E5%8A%A8.png">
+<meta property="og:image" content="http://rotaxs.github.io/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%85%83%E7%B4%A0.png">
+<meta property="og:image" content="http://rotaxs.github.io/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E6%89%A9%E5%B1%95.png">
+<meta property="og:image" content="http://rotaxs.github.io/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E6%89%A9%E5%B1%95%E9%A1%B5%E9%9D%A2.png">
+<meta property="og:image" content="http://rotaxs.github.io/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/AIX%E6%89%A9%E5%B1%95.png">
+<meta property="og:image" content="http://rotaxs.github.io/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/biliplus%E6%89%A9%E5%B1%95.png">
+<meta property="og:image" content="http://rotaxs.github.io/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/itab%E6%89%A9%E5%B1%95.png">
+<meta property="og:image" content="http://rotaxs.github.io/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E5%B9%BF%E5%91%8A%E6%89%A9%E5%B1%95.png">
+<meta property="og:image" content="http://rotaxs.github.io/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E7%BF%BB%E8%AF%91%E6%89%A9%E5%B1%95.png">
+<meta property="og:image" content="http://rotaxs.github.io/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E5%91%BD%E4%BB%A4%E6%8F%90%E7%A4%BA%E7%AC%A6.png">
+<meta property="og:image" content="http://rotaxs.github.io/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/dir%E5%91%BD%E4%BB%A4.png">
+<meta property="og:image" content="http://rotaxs.github.io/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E5%88%87%E6%8D%A2%E7%9B%98%E7%AC%A6.png">
+<meta property="og:image" content="http://rotaxs.github.io/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/cd%E5%91%BD%E4%BB%A4.png">
+<meta property="og:image" content="http://rotaxs.github.io/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F.png">
+<meta property="og:image" content="http://rotaxs.github.io/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F.png">
+<meta property="og:image" content="http://rotaxs.github.io/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%A4%B9%E5%8F%98%E9%87%8F.png">
+<meta property="og:image" content="http://rotaxs.github.io/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E5%B0%86%E7%BD%91%E7%AB%99%E5%AE%89%E8%A3%85%E4%B8%BA%E5%BA%94%E7%94%A8.png">
+<meta property="og:image" content="http://rotaxs.github.io/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E6%A0%BC%E5%BC%8F%E5%8C%96U%E7%9B%98.png">
+<meta property="og:image" content="http://rotaxs.github.io/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E6%A0%BC%E5%BC%8F%E5%8C%96U%E7%9B%981.png">
+<meta property="og:image" content="http://rotaxs.github.io/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E6%A0%BC%E5%BC%8F%E5%8C%96U%E7%9B%982.png">
+<meta property="article:published_time" content="2025-11-14T08:01:07.000Z">
+<meta property="article:modified_time" content="2026-08-25T08:26:06.565Z">
+<meta property="article:author" content="Rotas">
+<meta property="article:tag" content="计算机">
+<meta property="article:tag" content="Windows">
+<meta property="article:tag" content="命令提示符">
+<meta property="article:tag" content="环境变量">
+<meta property="article:tag" content="win11">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://rotaxs.github.io/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E4%B8%AA%E6%80%A7%E5%8C%96%E8%AE%BE%E7%BD%AE.png">
+  
+  
+  
+  <title>计算机常识（Windows 11） - Rotas&#39;s blogs</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"rotaxs.github.io","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Rotas&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content (desktop) -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-note"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-books"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile grid menu overlay -->
+<div id="mobile-grid-menu" class="d-lg-none">
+  <div class="mobile-grid-menu-inner">
+    <div class="container">
+      <div class="row">
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-home-fill"></i>
+                  <span>首页</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/archives/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-note"></i>
+                  <span>归档</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/tags/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-tags-fill"></i>
+                  <span>标签</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/categories/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-books"></i>
+                  <span>分类</span>
+                </div>
+              </a>
+            </div>
+          
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+            <a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-search"></i>
+                <span>搜索</span>
+              </div>
+            </a>
+          </div>
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn"
+               data-label-light="开灯"
+               data-label-dark="关灯">
+            <a href="javascript:;" aria-label="Color Toggle">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+                <span id="mobile-color-toggle-label">关灯</span>
+              </div>
+            </a>
+          </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/assets/website/banner1.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="计算机常识（Windows 11）"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-11-14 16:01" pubdate>
+          2025 年 11 月 14 日, 星期五
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          10k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          86 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">计算机常识（Windows 11）</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="软件篇">软件篇</h2>
+<h3 id="Windows11-操作系统">Windows11 操作系统</h3>
+<h4 id="认识主流的操作系统">认识主流的操作系统</h4>
+<p>操作系统本质上是一个软件，只不过其与计算机硬件进行“通讯”</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>Windows</strong>：目前，Windows 操作系统由微软公司（Microsoft Coporation）开发，因此 Windows 系统也集成了微软公司的生态，如办公软件有 Microsoft Office，Outlook 等，游戏有 Xbox，人工智能有 Copilot，浏览器有 Microsoft Edge。因此 Windows 操作系统几乎统治了全球的个人电脑市场</p>
+</li>
+<li class="lvl-2">
+<p><strong>Mac OS</strong>：Max OS 由苹果公司开发，其在生态安全性和稳定性上具有优势，但在软件兼容性和硬件选择上有一定限制</p>
+</li>
+<li class="lvl-2">
+<p><strong>Linux</strong>：Linux 严格意义上不能被称为一个操作系统，而是一个操作系统内核，基于该内核（开源），市面上有了很多 Linux 发行版（操作系统），如国人研发的 Deepin 就是基于 Linux 开发的。此外较为流行的发行版还有 Ubuntu，CentOS，ArchLinux，Fedora 等。Linux 系统凭借其<strong>开源高度自定义</strong>的特点，在服务器，嵌入式等领域有非常突出的应用</p>
+</li>
+</ul>
+<h4 id="个性化设置">个性化设置</h4>
+<p>在桌面空白处右键，（在更多中）可找到个性化设置，Windows 提供了<s>非常匮乏</s>的选项供用户设置</p>
+<p><img src="%E4%B8%AA%E6%80%A7%E5%8C%96%E8%AE%BE%E7%BD%AE.png" srcset="/img/loading.gif" lazyload alt="图：个性化设置"></p>
+<p>这里主要介绍桌面图标设置，这可以使得<code>此电脑</code>，<code>回收站</code>等图标显示在桌面上</p>
+<p>在<code>主题</code>设置中，点击桌面图标设置</p>
+<img src="/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E5%9B%BE%E6%A0%87%E8%AE%BE%E7%BD%AE.png" srcset="/img/loading.gif" lazyload class="" title="图：图标设置">
+<p>在弹出的窗口中，建议勾选<code>计算机</code>和<code>回收站</code>，<strong>然后点击应用</strong>，就能在桌面上看到相应的图标了</p>
+<h4 id="查看电脑基本参数">查看电脑基本参数</h4>
+<p>勾选计算机后，可以在桌面上看到此电脑的图标，<code>右击该图标-属性</code>，就能看到计算机的基本参数</p>
+<p>下图显示的是硬件参数</p>
+<img src="/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E7%A1%AC%E4%BB%B6%E5%8F%82%E6%95%B0.png" srcset="/img/loading.gif" lazyload class="" title="图：硬件参数">
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><span style="color:red;">存储</span>即硬盘容量</p>
+</li>
+<li class="lvl-2">
+<p>显卡 128 MB 通常是系统为集成显卡分配的保留内存，无法代表独立显卡的真实性能</p>
+<ul class="lvl-2">
+<li class="lvl-4">显卡（核心部件位 GPU，即 Graphics Processing Unit）一般用于处理图形计算</li>
+<li class="lvl-4">如今 GPU 也广泛用于 AI 领域</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>机带 RAM</p>
+<ul class="lvl-2">
+<li class="lvl-4">全称为 Random Access Memory，随机存取存储器</li>
+<li class="lvl-4">一般也被称为<span style="color:red;">内存</span>，决定同一时间能运行多少程序</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p><span style="color:red;">处理器</span></p>
+<ul class="lvl-2">
+<li class="lvl-4">即 CPU（Central Processing Unit）</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>系统类型</p>
+<ul class="lvl-2">
+<li class="lvl-4">图中表示处理器是<span style="color:red;">物理架构</span>为 64 位，操作系统的必须与架构相匹配（在重装系统时需要了解）</li>
+<li class="lvl-4">64 位操作系统能向下兼容，运行 32 位的应用程序</li>
+<li class="lvl-4">操作系统的位数越高，表示一次性能处理的数据越多</li>
+</ul>
+</li>
+</ul>
+<p>接下来看系统参数</p>
+<img src="/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E7%B3%BB%E7%BB%9F%E5%8F%82%E6%95%B0.png" srcset="/img/loading.gif" lazyload class="" title="图：系统参数">
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>版本</p>
+<ul class="lvl-2">
+<li class="lvl-4">Windows 从最早的 1.0 开始，到鼎盛时期的 Win7，再到 25 年停止服务的 Win10，如今正向全面进入 Win11 时代迈进</li>
+<li class="lvl-4">Windows 为用户提供了家庭版，专业版，LTSC 等多个版本（一般 Windows 笔记本电脑自带家庭版）</li>
+<li class="lvl-4">不同版本在某些功能上会有差异，如专业版提供 <em>Hyper-V 虚拟化</em>（用于虚拟机）等功能</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>版本号</p>
+<ul class="lvl-2">
+<li class="lvl-4">图中 25 表示 2025 年，H2 表示下半年</li>
+</ul>
+</li>
+</ul>
+<h4 id="桌面和文件夹">桌面和文件夹</h4>
+<p>C 盘一般被成为系统盘，因此，在 C 盘中会有一些特殊的文件夹，我们主要来认识下图框出来的四个</p>
+<img src="/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E6%96%87%E4%BB%B6%E5%A4%B9.png" srcset="/img/loading.gif" lazyload class="" title="图：文件夹">
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>首先是<code>Program File</code>和<code>Program Files(x86)</code>文件夹，这两个文件夹都用于存放应用程序，区别是（在目前主流的 64 位操作系统下）前者用于存放 64 位的应用程序，而后者用于存放 32 位的应用程序</p>
+</li>
+<li class="lvl-2">
+<p><code>Windows</code>文件夹是 Windows 操作系统的核心文件夹，其中比较常用的是<code>Fonts</code>文件夹，该文件夹用于存放 Windows 可用的字体，也可以下载第三方字体（一般是<code>.ttf</code>文件，双击可安装）</p>
+</li>
+<li class="lvl-2">
+<p>用户文件夹（Users）文件夹用于存放所有用户的数据（Windows 支持多用户），每个用户的数据相互独立（用以用户名命名的文件夹区分），其中，可能有的文件夹如下</p>
+</li>
+</ul>
+<img src="/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E7%94%A8%E6%88%B7%E6%96%87%E4%BB%B6%E5%A4%B9.png" srcset="/img/loading.gif" lazyload class="" title="图：用户文件夹">
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>.config</code>文件夹</p>
+<ul class="lvl-2">
+<li class="lvl-4">存放一些软件的个人配置文件</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>桌面（Desktop）文件夹</p>
+<ul class="lvl-2">
+<li class="lvl-4">电脑桌面</li>
+<li class="lvl-4"><span style="color:red;font-weight:bold;">即电脑桌面是个特殊的文件夹</span></li>
+</ul>
+</li>
+<li class="lvl-2">
+<p><code>AppData</code>文件夹</p>
+<ul class="lvl-2">
+<li class="lvl-4">这是一个隐藏文件夹，需勾选显示隐藏文件夹（后文会介绍）</li>
+<li class="lvl-4">该文件夹用于存放应用数据或配置文件，其中的<code>Local</code>，<code>Roaming</code>，<code>LocalLow</code>表示不同类型的应用数据</li>
+</ul>
+</li>
+</ul>
+<h4 id="文件系统">文件系统</h4>
+<p id="fileSystem"></p>
+文件系统是操作系统用于管理文件的“标准”，不同操作系统的文件系统也不同
+<p>如今，Windows 主要使用<code>NTFS</code>文件系统，不同于老式的<code>FAT32</code>操作系统，<code>NTFS</code>不再限制单个文件大小为 4GB。且其具有日志功能，可以记录电脑的操作，即使电脑断电，也能更好的恢复电脑数据</p>
+<p><strong>什么时候会用到文件系统？</strong></p>
+<p>文件系统看似与普通用户关系不大，实际上，当我们格式化（清空硬盘数据并改变改变文件系统格式） U 盘或硬盘时，系统会让我们选择一个文件系统。这时如果选择不当，可能会影响硬盘使用体验</p>
+<p><strong>认识文件路径</strong></p>
+<p>为方便管理文件，每个文件夹和文件都有一个自己的“地址”</p>
+<p>在 Windows 系统中，路径从盘符开始，基本的路径格式如下</p>
+<p><code>C:\文件夹1\文件夹2\文件1.txt</code></p>
+<p>这表明在 C 盘下有一个文件夹叫<code>文件夹1</code>，<code>文件夹1</code>下有个文件夹叫<code>文件夹2</code>，<code>文件夹2</code>下有个文件叫<code>文件 1</code></p>
+<p>一般的，文件夹（Folder）也被称为<span style="color:red;font-weight:bold;">目录</span>（Directory）</p>
+<p>由于文件夹的唯一性，因此在同一目录下，不能存在同名文件或同名文件夹（文件和文件夹也不可以同名）</p>
+<h4 id="任务栏">任务栏</h4>
+<p>一般来说，任务栏从左到右依次是<strong>开始菜单</strong>，（windows 搜索），<strong>应用程序区</strong>，<strong>系统托盘区</strong></p>
+<img src="/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E4%BB%BB%E5%8A%A1%E6%A0%8F.png" srcset="/img/loading.gif" lazyload class="" title="图：任务栏">
+<blockquote>
+<p>实际上，在任务栏的最右边有一个隐藏的按钮，点击可快速切换回桌面</p>
+</blockquote>
+<p>此外，右击任务栏空白处，可以打开任务栏设置</p>
+<p>将相应的应用或快捷方式拖到任务栏，可以将其添加到任务栏</p>
+<h4 id="文件">文件</h4>
+<p>这里我们需要搞清楚软件和文件的关系</p>
+<p>例如一个<code>.png</code>图片文件，我们在电脑上直接双击就可以打开了</p>
+<p>这看起来很自然，但是实际上，真正的过程是系统调用了相应的软件（如图片查看器），然后软件解析该文件</p>
+<p>这时有人可能会问：我电脑上也没装图片查看器啊</p>
+<p>其实，大部分 Windows 电脑上都自带了一个叫<code>照片</code>的软件（可以在开始菜单搜索搜到），这个软件可以解析<code>.png</code>格式的文件</p>
+<p>同样的，如果电脑上没装<code>Microsoft Office</code>或<code>WPS Office</code>等办公软件，我们也无法打开<code>.docx</code>，<code>.pptx</code>，<code>.xlsx</code>等文件，并且这些文件也不会显示相应的图标，这是因为只有在安装相应的软件时，软件会通过修改注册表（后面会有介绍）为这些文件添加图标</p>
+<p>对于程序员来说，一个<code>.c</code>文件，如果在电脑上没有装编译器或 IDE，那它也就是个普通的文本文件，与<code>.txt</code>文件（文本文件）也就只有扩展名不同的区别了</p>
+<p><strong>当电脑上有多个应用可以打开同一个文件时，可以右键该文件，在更多中找到<code>打开方式</code>，直接选择相应的应用打开；或者点击<code>选择其他应用程序</code>，在弹出的窗口中选择相应的程序后点击始终，从而修改这类文件的默认打开方式</strong></p>
+<p>这里再介绍一种特殊的文件——压缩文件</p>
+<p>这类文件通常以<code>.zip</code>，<code>.rar</code>，<code>.7z</code>结尾，不同的扩展名表示不同的压缩算法，微软只为我们提供了处理<code>.zip</code>的软件，<s>而且确实不太好用</s>（可以用第三方软件，后面会介绍）</p>
+<p><strong>压缩文件可以将多个文件夹和文件合并为一个文件，便于传输分享</strong></p>
+<p>综上，<strong>没有软件，那么文件也没有用</strong></p>
+<p>下面列举一些常见的扩展名</p>
+<table style="width: 100%; border-collapse: collapse;">
+    <caption>
+        <p style="text-align: center; font-weight:bold;color: #1e88e5;">🏷️ 常见文件扩展名</p>
+    </caption>
+    <thead>
+        <tr style="background-color: #f0f0f0;">
+            <th style="width: 15%; padding: 10px; border: 1px solid #ddd; text-align: center;">扩展名</th>
+            <th style="width: 15%; padding: 10px; border: 1px solid #ddd; text-align: center;">文件类型</th>
+            <th style="width: 40%; padding: 10px; border: 1px solid #ddd; text-align: center;">说明</th>
+            <th style="width: 30%; padding: 10px; border: 1px solid #ddd; text-align: center;">推荐打开程序 / 安全提示</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td colspan="4" style="background-color: #e3f2fd; font-weight: bold; text-align: center; padding: 10px; border: 1px solid #ddd;">一、 文档和文本类文件</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;"><strong>.docx</strong></td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">Word 文档</td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">微软 Word 软件的主流文档格式。</td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">Microsoft Word 或 WPS</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;"><strong>.xlsx</strong></td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">Excel 表格</td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">微软 Excel 软件的主流表格格式，用于数据统计和计算。</td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">Microsoft Excel 或 WPS</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;"><strong>.pptx</strong></td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">PowerPoint 演示文稿</td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">微软 PowerPoint 软件的主流演示文稿格式。</td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">Microsoft PowerPoint 或 WPS</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;"><strong>.pdf</strong></td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">可移植文档格式</td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">版式固定的通用文档格式，常用于合同、报告等正式文件。</td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">PDFgear 或 浏览器 或 WPS</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;"><strong>.txt</strong></td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">纯文本文档</td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">最简单的文本格式，只包含文字，不包含样式。</td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">记事本 (Notepad)</td>
+        </tr>
+        <tr>
+            <td colspan="4" style="background-color: #e3f2fd; font-weight: bold; text-align: center; padding: 10px; border: 1px solid #ddd;">二、 图像类文件</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;"><strong>.jpg / .jpeg</strong></td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">联合图像专家组</td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">最常见的照片格式，压缩率高，适合网络传输。</td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">图片查看器</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;"><strong>.png</strong></td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">便携式网络图形</td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">支持透明背景，常用于图标和网页图片。</td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">图片查看器</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;"><strong>.gif</strong></td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">图形交换格式</td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">支持动画效果（动图）。</td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">图片查看器 或 浏览器</td>
+        </tr>
+        <tr>
+            <td colspan="4" style="background-color: #e3f2fd; font-weight: bold; text-align: center; padding: 10px; border: 1px solid #ddd;">三、 音频和视频类文件</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;"><strong>.mp3</strong></td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">MPEG 音频</td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">最主流的音频格式，压缩率高，体积小。</td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">视频播放器</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;"><strong>.mp4</strong></td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">MPEG-4 视频</td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">最主流的视频格式，支持高质量视频和音频。</td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">视频播放器</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;"><strong>.avi</strong></td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">音频视频交错</td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">另一种常见的视频格式，常用于高清视频。</td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">视频播放器</td>
+        </tr>
+        <tr>
+            <td colspan="4" style="background-color: #ffccbc; font-weight: bold; text-align: center; padding: 10px; border: 1px solid #ddd;">四、 压缩和可执行文件（需注意安全）</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;"><strong>.zip</strong></td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">压缩文件包</td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">最常见的压缩格式，用于将多个文件打包或减小文件体积。</td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">需要解压缩软件（如 WinRAR, 7-Zip）</td>
+        </tr>
+        <tr>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;"><strong>.rar</strong></td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">压缩文件包</td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">另一种常见的压缩格式，通常压缩率更高。</td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">需要解压缩软件</td>
+        </tr>
+        <tr style="background-color: #fce4ec;">
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;"><strong>.exe</strong></td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">可执行程序文件</td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">程序的<strong>主启动文件</strong>，双击后会运行程序。</td>
+            <td style="padding: 10px; border: 1px solid #ddd; color: #d32f2f; font-weight: bold; text-align: center;">高风险！必须确保来源可靠，警惕病毒伪装。</td>
+        </tr>
+        <tr style="background-color: #fce4ec;">
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;"><strong>.dll</strong></td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">动态链接库文件</td>
+            <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">程序的“共享零件”，不能直接打开或运行。</td>
+            <td style="padding: 10px; border: 1px solid #ddd; color: #d32f2f; font-weight: bold; text-align: center;">重要！不要随意删除或修改，否则可能导致系统故障。</td>
+        </tr>
+    </tbody>
+</table>
+<h4 id="快捷方式">快捷方式</h4>
+<p>快捷方式可以理解为一个链接，指向相应的文件或网址</p>
+<p>通常我们安装软件后出现在桌面的就是快捷方式，其<strong>特点是图标的左下角有一个指向右上的箭头</strong></p>
+<p>因此，<strong>删除快捷方式并不等于卸载软件</strong>，具体的卸载软件的方式后面会介绍</p>
+<p>我们也可以创建快捷方式，一般有两种方式</p>
+<ol>
+<li class="lvl-3">
+<p>右键相应的文件（软件）或文件夹，在更多中找到并点击创建快捷方式</p>
+</li>
+<li class="lvl-3">
+<p>在空白处右键，点击新建，选择快捷方式，会弹出一个窗口</p>
+</li>
+</ol>
+<img src="/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F.png" srcset="/img/loading.gif" lazyload class="" title="快捷方式">
+<p>接着可以在输入框中输入文件（夹）路径或网址</p>
+<blockquote>
+<p>tips：由于快捷方式只是一个链接，因此，修改快捷方式的文件名或是图标（右键快捷方式，选择更多-属性-快捷方式-更改图标）都不会对原文件（夹）有影响顺带一提，快捷方式其实是有扩展名的，扩展名为 <code>.ink</code></p>
+</blockquote>
+<h3 id="系统应用">系统应用</h3>
+<p>系统应用分为两种</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>一种是传统的应用程序，一般在 <code>C:\Windows\System32</code> 目录下，如任务管理器等</p>
+</li>
+<li class="lvl-2">
+<p>另一种是自从 Win10 发布后，微软新推出的应用程序，即 UWP （Universal Windows Platform），这种应用最大的特点是通过微软应用商店（Microsoft Store）下载，存储位置一般在 <code>C:\Program Files\WindowsApps</code>，如计算器等</p>
+</li>
+</ul>
+<p><strong>了解可执行文件</strong></p>
+<p>传统的应用一般是<code>可执行文件</code>（以<code>.exe</code>结尾）</p>
+<p>此外，在网络上可以下载到的可执行文件还有<code>.msi</code>（安装包文件，有时候<code>.exe</code>文件也可以作为安装包），<code>.bat/.cmd</code>（批处理文件，一般用于修改系统设置，文件批量处理）</p>
+<blockquote>
+<p>需要注意的是，在 Windows 11 后运行可执行文件时会弹出一个窗口询问是否允许对设备进行修改，因为有的可执行文件可能会携带（或本身就是）病毒等非法程序，<span style="color:red;font-weight:bold;">因此切忌运行来路不明的可执行文件</span></p>
+</blockquote>
+<p><strong>动态链接库文件</strong></p>
+<p>我们常常会在应用的安装目录下看到许多<code>.dll</code>文件，这些就是动态链接库文件，其包含了一套给可执行程序调用的函数和数据，且可以共享给多个程序调用</p>
+<p>可以理解为一个<code>.dll</code>文件实现了一个或多个基础功能，可执行程序通过调用这些基础功能从而实现更加复杂的功能</p>
+<p>接下来介绍一些比较重要的系统应用</p>
+<h4 id="文件资源管理器">文件资源管理器</h4>
+<p>双击桌面上的<code>此电脑</code>（新系统可能需要设置），可以打开文件资源管理器（<code>explorer</code>）</p>
+<blockquote>
+<p>也可通过快捷键<code>Win+E</code>打开</p>
+</blockquote>
+<p>这里强烈建议打开文件扩展名，如下</p>
+<img src="/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E6%96%87%E4%BB%B6%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86%E5%99%A8.png" srcset="/img/loading.gif" lazyload class="" title="图：文件资源管理器">
+<p>通过左键选中并右击文件夹，可以选择将文件夹固定到快速访问栏</p>
+<p>通过上方的地址栏可以快速定位到文件夹</p>
+<h4 id="任务管理器">任务管理器</h4>
+<p>右击任务栏空白处，可以打开任务管理器（task manager 简称 <code>taskmgr</code>）</p>
+<blockquote>
+<p>也可以通过快捷键<code>Ctrl+Shift+Esc</code>或<code>Ctrl+Alt+Del</code>打开任务管理器</p>
+</blockquote>
+<img src="/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%E5%99%A8.png" srcset="/img/loading.gif" lazyload class="" title="图：任务管理器">
+<p>在任务管理器中，我们可以看到目前电脑上的进程，以及各进程的 CPU 和内存损耗</p>
+<p>右击进程，可以选择结束进程以减少电脑损耗（<strong>如在电脑卡顿或应用无响应时可结束相应进程</strong>）</p>
+<h4 id="注册表">注册表</h4>
+<blockquote>
+<p>注册表（Registry Editor，简写为 <code>Regedit</code>）是一个巨大的、分层级的数据库，用于存储 Windows 操作系统、所有硬件设备、以及几乎所有已安装应用程序的配置信息和设置</p>
+</blockquote>
+<p>Windows 中有许多配置信息，如<em>桌面壁纸</em>，<em>右键菜单的项</em> 等，当然不能把他们放在内存或缓存里，但是直接放在硬盘中也不安全（可能会被随意修改）</p>
+<p>因此，微软将这些数据放在一些文件中（当电脑运行时，这些文件和对应的文件夹会被锁定，不允许用户访问），并且提供了注册表这个<strong>接口</strong> 给用户访问</p>
+<p>要想打开注册表，可以直接在开始菜单搜索<code>注册表</code>，也可以按下<code>Win+R</code>打开<strong>运行窗口</strong>，然后输入<code>regedit</code>，并按下回车</p>
+<p>有关注册表的更多内容，这里就不展开了</p>
+<h4 id="截图工具">截图工具</h4>
+<p>看了那么多理论，再来了解一点实用的</p>
+<p>相信很多人在电脑上截图都是用的微信或 QQ 的截图工具，实际上，Windows 自带了一个截图工具</p>
+<p>虽然功能上比不上前者，但其胜在简洁快捷，通过快捷键<code>Win+Shift+S</code>可以打开截图工具</p>
+<p>然后在窗口上方的选项中可以选择截屏或录屏，选择后选定要截图的区域就可以了</p>
+<p>截完的图会保存在剪切板中，可以直接用<code>Ctrl+V</code>粘贴在聊天对话框，或在用户目录下的图片文件夹中找到相应的截图文件</p>
+<p>如果是录屏，则结束后的文件会保存在用户目录下的视频文件夹中</p>
+<h3 id="第三方应用">第三方应用</h3>
+<p><strong>如何下载第三方应用</strong></p>
+<p>下载应用主要有下面三种渠道</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>浏览器搜索</p>
+</li>
+<li class="lvl-2">
+<p>微软应用商店</p>
+</li>
+<li class="lvl-2">
+<p>品牌电脑自带的应用商店</p>
+</li>
+</ul>
+<p>对于第一种方式，由于 Windows 的“开放包容”，网络上有很多应用程序携带病毒或广告</p>
+<p>而对于后两者，我们常常无法保证软件是最新的版本，且有些软件无法在上面找到</p>
+<p>我们尝试换位思考，一个开发者，写了一个自己的软件，他会把它放在哪里？答案是 <strong>官网</strong></p>
+<p>我始终坚持，<strong>软件应该去官网或开发者指定的渠道下载</strong></p>
+<blockquote>
+<p>是否是官网也需要辨别，有些软件会伪装成其他软件的官网（实在恶心），一般可以看网站的域名辨别是否是官网</p>
+</blockquote>
+<p>到这里，又会遇到一些问题</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>无法进入官网</p>
+</li>
+<li class="lvl-2">
+<p>官方正版要付费</p>
+</li>
+</ul>
+<p>有些国外的软件服务器在海外，（由于种种原因）国内常常无法访问这些网站，这时就需要“科学上网”（无法多说）</p>
+<p>而对于付费软件，能支持的尽量支持，如果价格实在不太合理，可以去相关论坛或视频网站找大佬分享的破解版（不推荐）</p>
+<p>解决了下载软件的问题，就可以了解电脑上的一些常用的软件了</p>
+<h4 id="微信-QQ">微信/QQ</h4>
+<p>在 <a target="_blank" rel="noopener" href="https://weixin.qq.com/">微信官网</a> 和 <a target="_blank" rel="noopener" href="https://im.qq.com/index/">QQ 官网</a> ，我们都能看到很多下载选项，一般选择 Windows 64 位 就可以了</p>
+<p><s>吐槽一下：微信和 QQ 对国人影响太大了</s></p>
+<p>这虽然便利了我们的使用，但是也应该让我们有一些思考</p>
+<p>比如，<strong>当我们在微信中点开一个链接，为什么我们能够进入这个网站，看到里面的内容</strong>？</p>
+<p>再比如，<strong>在手机微信中（电脑微信没这个功能）点开一个文档，可以在微信内部直接打开</strong>？</p>
+<p>可以说，微信/QQ 就是两个“缝合怪”，里面除了聊天，还内置了图片查看器，浏览器，小程序，文件管理和传输工具等功能</p>
+<p>但实际上，微信的内置浏览器和文档阅读器都极其简陋，有时候我们无法获得想要的效果</p>
+<p>因此，当有人给我们发来一个链接或文件时，（在非临时情况下）我们尽量用专门的软件打开</p>
+<h4 id="解压缩软件">解压缩软件</h4>
+<p>解压缩软件推荐两个，分别是 <a target="_blank" rel="noopener" href="https://www.7-zip.org/">7-zip</a> 和 <a target="_blank" rel="noopener" href="https://www.bandisoft.com/bandizip/">Bandzip</a>，这两款软件能识别的压缩文件格式较多，功能强大，区别是前者 UI 较为简陋，后者免费版有广告（影响不大）</p>
+<h4 id="办公软件">办公软件</h4>
+<p>国内的 <a target="_blank" rel="noopener" href="https://www.wps.cn/">WPS</a> 还算不错，如果追求更强大的功能，也可以用微软的 <a target="_blank" rel="noopener" href="https://www.microsoftstore.com.cn/microsoft365/microsoft-365-family">Microsoft 365</a>（订阅版），或最新的 <a target="_blank" rel="noopener" href="https://www.microsoftstore.com.cn/software/office">Office 2024</a>（买断制） ，但是有点贵（有的笔记本会赠送 Office）</p>
+<p>如果用的微软的 Office，那么不会有 PDF 阅读器（WPS 会自带一个 PDF 阅读器），这时可以考虑 <a target="_blank" rel="noopener" href="https://www.pdfgear.com/zh/">PDFgear</a></p>
+<h4 id="卸载软件">卸载软件</h4>
+<p>电脑上卸载软件有以下几种方式</p>
+<ol>
+<li class="lvl-3">
+<p>使用软件自带的卸载程序（推荐）</p>
+</li>
+</ol>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>很多软件在安装目录下会有一个 <code>Uninstall.exe</code> 可执行程序，双击运行即可卸载该软件</p>
+</li>
+<li class="lvl-2">
+<p>缺点是软件的残留数据不一定被清除</p>
+</li>
+</ul>
+<ol start="2">
+<li class="lvl-3">
+<p>控制面板中的卸载程序（不推荐）</p>
+</li>
+</ol>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>开始菜单搜索控制面板，点击卸载程序，找到相应的软件双击卸载</p>
+</li>
+<li class="lvl-2">
+<p>本质是运行软件安装目录下的 <code>Uninstall.exe</code></p>
+</li>
+</ul>
+<ol start="3">
+<li class="lvl-3">
+<p>第三方软件卸载（强烈推荐）</p>
+</li>
+</ol>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>使用<strong>正确的</strong>第三方软件不但能卸载软件本体，还能清除残存数据</p>
+</li>
+</ul>
+<p>这里推荐的软件是 <a target="_blank" rel="noopener" href="https://hibitsoft.ir/Uninstaller.html">HiBit Uninstaller</a></p>
+<img src="/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E5%8D%B8%E8%BD%BD%E8%BD%AF%E4%BB%B6.png" srcset="/img/loading.gif" lazyload class="" title="图：卸载软件">
+<p>进入官网我们可以看到软件提供了两个版本</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>Installable Version</code>：即提供一个安装包，需要安装后使用</p>
+</li>
+<li class="lvl-2">
+<p><code>Protable Version</code>：也就是常说的绿色版，下载后解压即可直接使用</p>
+</li>
+</ul>
+<p>这里按自己需求选择就行，不知道怎么选的话选 <code>Installable Version</code> 就行</p>
+<h3 id="驱动">驱动</h3>
+<p>前面我们了解到，操作系统是直接和硬件打交道的，但是不同的硬件的制造厂商不同，操作系统如何知道调用这些硬件呢</p>
+<p>这就需要驱动程序（Device Driver）了，驱动程序由硬件厂商编写，负责将操作系统的命令翻译成硬件能理解和执行的指令</p>
+<p>常见的驱动有<strong>打印机驱动</strong>，<strong>显卡驱动</strong>，<strong>声卡驱动</strong>，<strong>USB 驱动</strong></p>
+<p>因此当你发现某个硬件突然不工作了，除了考虑是否是硬件损坏，应该优先考虑是不是驱动除了问题</p>
+<p>也许你会说装电脑这么久从来都没装过驱动，其实是 Windows 系统会自动安装相应的驱动（打印机驱动一般要手动安装），代价是驱动可能不与硬件完全匹配，导致硬件无法发挥最大效能</p>
+<p>开始菜单搜索并打开<code>设备管理器</code>，可以看到当前计算机的硬件，对于每一个硬件，都能找到对应的驱动程序</p>
+<p>当某个硬件图标旁显示了黄色感叹号时，说明该硬件不能正常工作，需要下载相应的驱动</p>
+<p>可以选择双击硬件图标，选择<code>驱动程序-更新驱动程序-自动搜索驱动程序</code></p>
+<img src="/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E9%A9%B1%E5%8A%A8.png" srcset="/img/loading.gif" lazyload class="" title="图：下载驱动">
+<p>如果没有搜索到相应的驱动，则需要去硬件的官网下载相应驱动，然后点击<code>浏览我的电脑以查找对应驱动</code>进行手动安装</p>
+<blockquote>
+<p>tips：安装完驱动后，驱动文件就可以删除了</p>
+</blockquote>
+<h3 id="浏览器">浏览器</h3>
+<p>浏览器可以说是电脑上最常用的一个软件了</p>
+<p>但是，浏览器除了上网外，还有很多实用的配置</p>
+<p>在了解浏览器之前，我们先来认识一下搜索引擎</p>
+<h4 id="搜索引擎">搜索引擎</h4>
+<blockquote>
+<p>搜索引擎（Search Engine）是一种特殊的网站或软件服务。它的核心工作是收集、整理和索引互联网上数以万亿计的网页内容，并在你提出问题时，快速为你找到最相关的信息</p>
+</blockquote>
+<p>搜索引擎利用<strong>爬虫</strong>技术，不断在网络上爬取数据并存入相应的数据库，当用户输入信息时，搜索引擎就会在数据库中检索相关信息，进行排序后展示给用户</p>
+<p>目前主流的搜索引擎如下</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>Google</strong>：由谷歌公司开发，是全球最大的搜索引擎，检索能力强，国内网络无法访问</p>
+</li>
+<li class="lvl-2">
+<p><strong>Bing</strong>：由微软公司开发，是<code>Microsoft Edge</code>浏览器的默认搜索引擎</p>
+</li>
+<li class="lvl-2">
+<p><strong>百度</strong>：百度公司开发，国内主流，<s>百度广告那么多，不理解为什么要用百度</s></p>
+</li>
+</ul>
+<p>正确使用搜索引擎能帮助我们提高检索信息的效率，以下是一些搜索引擎的“高级”用法</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>精确搜索：<code>&quot;&quot;</code></p>
+<ul class="lvl-2">
+<li class="lvl-4">强制搜索引擎只返回完全相同、顺序不变的短语的网页</li>
+<li class="lvl-4">如搜索 <code>&quot;苹果手机&quot;</code>，那么搜索引擎就会返回包含<code>苹果手机</code>完整短语的条目</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>排除关键字：<code>-</code></p>
+<ul class="lvl-2">
+<li class="lvl-4">排除不需要的内容</li>
+<li class="lvl-4">如搜索 <code>苹果 - 手机</code>，那么结果中就不会出现苹果手机相关内容，而返回苹果的相关条目</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>站内搜索：<code>site:</code></p>
+<ul class="lvl-2">
+<li class="lvl-4">在特定网站搜索</li>
+<li class="lvl-4">如搜索 <code>二分查找 site:www.zhihu.com</code>，那么结果全是知乎中关于二分查找的文章</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>按文件类型查找：<code>filetype:</code></p>
+<ul class="lvl-2">
+<li class="lvl-4">查找文件</li>
+<li class="lvl-4">如搜索 <code>数据结构 filetype:pdf</code> 那么返回的结果就都是 pdf 文件</li>
+</ul>
+</li>
+</ul>
+<h4 id="浏览器基本元素">浏览器基本元素</h4>
+<p>现代浏览器的基本元素如下</p>
+<img src="/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E6%B5%8F%E8%A7%88%E5%99%A8%E7%9A%84%E5%85%83%E7%B4%A0.png" srcset="/img/loading.gif" lazyload class="" title="图：浏览器的基本元素">
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>标签页</p>
+<ul class="lvl-2">
+<li class="lvl-4">一个标签页就是一个页面</li>
+<li class="lvl-4">主页：一种特殊但又不那么特殊的标签页，用来作为浏览器的初始页面，可放些常用网址</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>地址栏</p>
+<ul class="lvl-2">
+<li class="lvl-4">网址输入在这里</li>
+<li class="lvl-4">地址栏一般也可以当作搜索栏来用（调用的搜索引擎可以在浏览器设置中进行设置）</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>搜索栏</p>
+<ul class="lvl-2">
+<li class="lvl-4">调用<strong>搜索引擎</strong>进行搜索（Edge 浏览器默认主页的搜索引擎是 Bing）</li>
+<li class="lvl-4"><strong>不能输入网址</strong></li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>收藏夹栏/书签栏</p>
+<ul class="lvl-2">
+<li class="lvl-4">存放一些常用网站</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>扩展</p>
+<ul class="lvl-2">
+<li class="lvl-4">后面会介绍</li>
+</ul>
+</li>
+</ul>
+<h4 id="浏览器内核">浏览器内核</h4>
+<p>当我们在浏览器地址栏输入对应的地址时，对方服务器就会发送信息到我们的电脑上，而要想渲染这些信息，就需要浏览器内核</p>
+<p>浏览器内核由<code>渲染引擎</code>和<code>JavaScript 引擎</code>组成，前者决定网页的样式，后者决定网页的功能</p>
+<p>主流的浏览器内核如下</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>Chromium 内核</strong></p>
+<ul class="lvl-2">
+<li class="lvl-4">谷歌公司开发</li>
+<li class="lvl-4">代表浏览器：Chrome，Microsoft Edge，Opera</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p><strong>Gecko 内核</strong></p>
+<ul class="lvl-2">
+<li class="lvl-4">代表浏览器：Mozilla Firefox</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p><strong>WebKit 内核</strong></p>
+<ul class="lvl-2">
+<li class="lvl-4">代表浏览器：Apple Safari</li>
+</ul>
+</li>
+</ul>
+<p>由于不同的内核对前端代码的“翻译”不同，因此会出现同一个网页在不同内核的浏览器上的表现效果不同的情况（比如 Chrome 的扩展可以在 Edge 上使用，但不能在 Firefox 上使用）</p>
+<h4 id="浏览器的灵魂——插件">浏览器的灵魂——插件</h4>
+<p>可以说，电脑浏览器要是没有插件，将少了一大乐趣</p>
+<p>使用浏览器扩展，我们能修改浏览器外观和功能，以 Edge 浏览器为例</p>
+<p>首先打开扩展页面</p>
+<img src="/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E6%89%A9%E5%B1%95.png" srcset="/img/loading.gif" lazyload class="" title="图：浏览器扩展">
+<p>建议打开开发人员模式（允许以文件的形式导入扩展）</p>
+<img src="/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E6%89%A9%E5%B1%95%E9%A1%B5%E9%9D%A2.png" srcset="/img/loading.gif" lazyload class="" title="图：浏览器扩展">
+<p>在左边的获取 Microsoft Edge 扩展即可进入微软扩展商店，这里有许多有趣的扩展，读者可自行探索</p>
+<p>这里也推荐几个实用的扩展</p>
+<img src="/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/AIX%E6%89%A9%E5%B1%95.png" srcset="/img/loading.gif" lazyload class="" title="图：浏览器扩展">
+<img src="/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/biliplus%E6%89%A9%E5%B1%95.png" srcset="/img/loading.gif" lazyload class="" title="图：浏览器扩展">
+<img src="/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/itab%E6%89%A9%E5%B1%95.png" srcset="/img/loading.gif" lazyload class="" title="图：浏览器扩展">
+<img src="/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E5%B9%BF%E5%91%8A%E6%89%A9%E5%B1%95.png" srcset="/img/loading.gif" lazyload class="" title="图：浏览器扩展">
+<img src="/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E7%BF%BB%E8%AF%91%E6%89%A9%E5%B1%95.png" srcset="/img/loading.gif" lazyload class="" title="图：浏览器扩展">
+<h2 id="操作篇">操作篇</h2>
+<h3 id="配置环境变量">配置环境变量</h3>
+<h4 id="认识命令提示符">认识命令提示符</h4>
+<p>命令提示符（Command Prompt，简写为 <code>cmd</code>）</p>
+<p>通过<code>Win+R</code>呼出运行窗口，输入<code>cmd</code>即可打开</p>
+<p>也可以在开始菜单搜索命令提示符打开</p>
+<img src="/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E5%91%BD%E4%BB%A4%E6%8F%90%E7%A4%BA%E7%AC%A6.png" srcset="/img/loading.gif" lazyload class="" title="图：命令提示符">
+<p>在命令提示符中可以运行一些简单的指令，一下是一些常用的命令和效果</p>
+<img src="/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/dir%E5%91%BD%E4%BB%A4.png" srcset="/img/loading.gif" lazyload class="" title="图：dir命令">
+<p>注意到在所有的文件和文件夹最上面还有一个<code>.</code>吗？在计算机中，我们<span style="color:red;font-weight:bold;">用<code>.</code>表示当前目录，用<code>..</code>表示上一级目录</span></p>
+<img src="/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E5%88%87%E6%8D%A2%E7%9B%98%E7%AC%A6.png" srcset="/img/loading.gif" lazyload class="" title="图：切换盘符">
+<img src="/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/cd%E5%91%BD%E4%BB%A4.png" srcset="/img/loading.gif" lazyload class="" title="图：cd命令">
+<blockquote>
+<p>cmd 对大小写并不敏感，即 Dir 与 dir 表示同一个意思</p>
+</blockquote>
+<p><code>cmd</code> 也有运行窗口的功能，即输入变量名可以访问变量值，因此，接下来我们来介绍一下环境变量</p>
+<h4 id="环境变量">环境变量</h4>
+<p>环境变量相当于计算机全局的变量，通过设置环境变量，我们可以在计算机的其他地方访问到某个特定文件或文件夹</p>
+<p>通过<code>Win+R</code>呼出运行窗口，输入<code>taskmgr</code>会发现系统打开了任务管理器</p>
+<p>实际上，任务管理器作为一个软件（文件名为<code>taskmgr.exe</code>），其保存在文件夹<code>C:\Windows\System32</code>中，Windows 系统通过设置该目录为环境变量，将该目录下中所有的文件添加到了环境变量中，使得这些文件可以在全局被访问（如果是<code>.exe</code>文件，在访问时可以省略扩展名）</p>
+<p>同样的，如果在运行窗口或资源管理器的路径栏中输入<code>%windir%</code>，资源管理器就会自动跳转到<code>C:\Windows</code>路径下，因为 Windows 默认将 <code>windir</code> 作为该路径的变量名，通过 <code>%变量名%</code> 就可以直接访问该路径</p>
+<h4 id="配置环境变量-2">配置环境变量</h4>
+<p>在桌面上右键此电脑（没有的需按前文个性化设置条目进行配置），点击属性，往下翻可以找到<code>高级系统设置</code>，然后点击<code>环境变量</code></p>
+<img src="/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F.png" srcset="/img/loading.gif" lazyload class="" title="图：环境变量">
+<p>在弹出的窗口中可以看到两栏，<strong>用户变量</strong>和<strong>系统变量</strong></p>
+<blockquote>
+<p>Windows 是一个多用户系统，即一个电脑可以有多个用户不同用户有不同的电脑桌面，文件等，权限也可以不同</p>
+</blockquote>
+<p>我们一般不需要对此进行区分，只需要操作<strong>用户变量</strong>就行</p>
+<p>首先需要关注<code>Path</code>变量，双击该变量，在弹出的窗口中我们可以看到很多路径，这里存放的就是文件（软件）的环境变量（注意是添加该文件所在的目录）</p>
+<p>比如在<code>C:\Program Files (x86)\mingw64\bin</code>目录下有一个<code>gcc.exe</code>文件，我想把该文件添加到环境变量，只需要点开<code>Path</code>，然后点击新建，复制该路径就可以了</p>
+<p>接下来在<code>cmd</code>就可以使用该程序了</p>
+<img src="/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F.png" srcset="/img/loading.gif" lazyload class="" title="图：配置环境变量">
+<p>如果要添加文件夹变量，只需要在用户变量新建并输入文件夹路径即可</p>
+<img src="/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%A4%B9%E5%8F%98%E9%87%8F.png" srcset="/img/loading.gif" lazyload class="" title="图：配置环境变量">
+<blockquote>
+<p>注：配置完环境变量后要<strong>点击确定</strong>直至关闭所有窗口（设置窗口除外）</p>
+</blockquote>
+<h3 id="常用快捷键">常用快捷键</h3>
+<p><strong>（通用）快捷键</strong></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>复制/粘贴：<code>Ctrl+C</code>，<code>Ctrl+V</code></p>
+</li>
+<li class="lvl-2">
+<p>剪切：<code>Ctrl+X</code></p>
+</li>
+<li class="lvl-2">
+<p>撤回：<code>Ctrl+Z</code></p>
+<ul class="lvl-2">
+<li class="lvl-4">适用场景：误删文件、误删文字、部分专业软件撤回</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>查找：<code>Ctrl+F</code></p>
+<ul class="lvl-2">
+<li class="lvl-4">浏览器，代码编辑器，IDE，Word，Excel 等一般都支持</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>切换窗口：<code>Alt+Tab</code></p>
+</li>
+<li class="lvl-2">
+<p>切换任务视图：<code>Win+Tab</code></p>
+</li>
+<li class="lvl-2">
+<p>打开剪切板：<code>Win+V</code></p>
+</li>
+<li class="lvl-2">
+<p>截图：<code>Win+Shift+S</code></p>
+</li>
+<li class="lvl-2">
+<p>录屏（Xbox）：<code>Win+G</code></p>
+</li>
+<li class="lvl-2">
+<p>复制并粘贴：<code>Ctrl+D</code></p>
+<ul class="lvl-2">
+<li class="lvl-4">常用于一些绘图软件</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>打开任务管理器：<code>Ctrl+Shift+Esc</code></p>
+</li>
+<li class="lvl-2">
+<p>创建虚拟桌面：<code>Win+Ctrl+D</code></p>
+<ul class="lvl-2">
+<li class="lvl-4">切换虚拟桌面：<code>Win+Ctrl+方向左/右键</code></li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>控制窗口大小：<code>Win+D/↑/↓/←/→</code></p>
+</li>
+</ul>
+<p><strong>编程常用快捷键</strong></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>大小写切换/输入字符切换：<code>Shift</code>+相应按键</p>
+</li>
+<li class="lvl-2">
+<p>删除整个单词：<code>Ctrl+Backspace</code></p>
+</li>
+<li class="lvl-2">
+<p>复制并粘贴行：<code>Alt+Shift+方向上/下键</code></p>
+<ul class="lvl-2">
+<li class="lvl-4">部分编辑器支持</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>多光标：<code>Ctrl+Alt+方向上/下键</code></p>
+<ul class="lvl-2">
+<li class="lvl-4">部分编辑器支持</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>选中相同内容：<code>Ctrl+D</code></p>
+<ul class="lvl-2">
+<li class="lvl-4">部分编辑器支持</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p>终止控制台进程：<code>Ctrl+C</code></p>
+</li>
+</ul>
+<p><strong>可配置快捷键</strong></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p>输入法</p>
+<ul class="lvl-2">
+<li class="lvl-4">依此进入<code>设置-时间和语言-语言和区域-微软拼音输入法-按键</code>可配置输入法快捷键</li>
+</ul>
+</li>
+</ul>
+<p><strong>特殊按键</strong></p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>Insert</code>键（<code>ins</code>）</p>
+<ul class="lvl-2">
+<li class="lvl-4">部分编辑器支持，可以把光标变成方框，当输入时会覆盖后面的字符</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p><code>Delete</code>键（<code>del</code>）</p>
+<ul class="lvl-2">
+<li class="lvl-4">与<code>Backspace</code>键相对，<code>Backspace</code>删除光标前面的文字，而<code>del</code>键删除光标后面的文字</li>
+<li class="lvl-4">此外，选中文件后按下<code>del</code>键可以直接删除文件（将文件移入回收站）</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p><code>Home</code>键和<code>End</code>键</p>
+<ul class="lvl-2">
+<li class="lvl-4">在编辑文字时可将光标快速移动到<strong>行首</strong>或<strong>行尾</strong></li>
+</ul>
+</li>
+<li class="lvl-2">
+<p><code>Paragraph Up</code>键（<code>PgUp</code>）和<code>Paragraph Down</code>键（<code>PgDn</code>）</p>
+<ul class="lvl-2">
+<li class="lvl-4">在编辑文字时可将光标快速移动到<strong>段首</strong>或<strong>段末</strong></li>
+</ul>
+</li>
+<li class="lvl-2">
+<p><code>Number Lock</code>键</p>
+<ul class="lvl-2">
+<li class="lvl-4">全键盘中用于锁定数字小键盘</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p><code>Capital Letter Lock</code>键（<code>CapsLock</code>）</p>
+<ul class="lvl-2">
+<li class="lvl-4">英文大小写切换</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p><code>tabulation</code>键（<code>Tab</code>）</p>
+<ul class="lvl-2">
+<li class="lvl-4">制表符的映射</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p><code>Escape</code>键（<code>Esc</code>）</p>
+<ul class="lvl-2">
+<li class="lvl-4">部分软件用于终止会话</li>
+</ul>
+</li>
+</ul>
+<h3 id="将网站安装为应用">将网站安装为应用</h3>
+<p>Edge 浏览器提供了将网站安装为应用的功能，使我们能够快捷访问特定网站</p>
+<img src="/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E5%B0%86%E7%BD%91%E7%AB%99%E5%AE%89%E8%A3%85%E4%B8%BA%E5%BA%94%E7%94%A8.png" srcset="/img/loading.gif" lazyload class="" title="图：将网站安装为应用">
+<h3 id="格式化-U-盘">格式化 U 盘</h3>
+<p>当 U 盘损坏无法打开时，有时可以通过格式化 U 盘“修复”（当然 U 盘中的数据也会被清空），方法如下</p>
+<p>将 U 盘插入电脑相应的接口</p>
+<p>按下 <code>Win + X</code>，选择磁盘管理</p>
+<img src="/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E6%A0%BC%E5%BC%8F%E5%8C%96U%E7%9B%98.png" srcset="/img/loading.gif" lazyload class="" title="图：格式化U盘">
+<p>找到 U 盘对应的分区（可根据 U 盘容量大小判断），右键该分区，选择格式化</p>
+<img src="/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E6%A0%BC%E5%BC%8F%E5%8C%96U%E7%9B%981.png" srcset="/img/loading.gif" lazyload class="" title="图：格式化U盘">
+<p>卷标即 U 盘名称，可自定义，<a href="#fileSystem">文件系统</a> 选择 NTFS，其他保持不变，然后点击确定即可开始格式化 U 盘了</p>
+<img src="/%E5%85%B6%E4%BB%96/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%B8%B8%E8%AF%86%EF%BC%88windows-11%EF%BC%89/%E6%A0%BC%E5%BC%8F%E5%8C%96U%E7%9B%982.png" srcset="/img/loading.gif" lazyload class="" title="图：格式化U盘">
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E5%85%B6%E4%BB%96/" class="category-chain-item">其他</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/computer/" class="print-no-link">#计算机</a>
+      
+        <a href="/tags/Windows/" class="print-no-link">#Windows</a>
+      
+        <a href="/tags/%E5%91%BD%E4%BB%A4%E6%8F%90%E7%A4%BA%E7%AC%A6/" class="print-no-link">#命令提示符</a>
+      
+        <a href="/tags/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F/" class="print-no-link">#环境变量</a>
+      
+        <a href="/tags/win11/" class="print-no-link">#win11</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>计算机常识（Windows 11）</div>
+      <div>http://rotaxs.github.io/其他/计算机常识（windows-11）/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Rotas</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年11月14日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/math/%E5%BE%AE%E7%A7%AF%E5%88%86/%E6%94%B6%E9%9B%86%E4%B8%80%E4%BA%9B%E6%9C%89%E8%B6%A3%E7%9A%84%E6%9D%82%E9%A2%98/" title="收集一些有趣的杂题">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">收集一些有趣的杂题</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/math/%E5%BE%AE%E7%A7%AF%E5%88%86/%E6%94%B6%E9%9B%86%E4%B8%80%E4%BA%9B%E8%BE%83%E9%9A%BE%E7%9A%84%E7%A7%AF%E5%88%86%E9%A2%98/" title="收集一些较难的积分题">
+                        <span class="hidden-mobile">收集一些较难的积分题</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <br> <span id="site-run-time">网站已运行 0 天</span> <br> <span id="site-total-words">博客总字数 119,164 字</span> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    function isExpandAllEnabled() {
+      return CONFIG.toc && CONFIG.toc.expand_all === true;
+    }
+    function expandAllToc() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .tocbot-is-collapsed').removeClass('tocbot-is-collapsed');
+    }
+    function updateTocToggle($li, $childList) {
+      var $toggle = $li.children('.toc-toggle');
+      if ($toggle.length === 0) { return; }
+      var collapsed = $childList.hasClass('tocbot-is-collapsed');
+      $toggle
+        .toggleClass('toc-toggle-collapsed', collapsed)
+        .toggleClass('toc-toggle-expanded', !collapsed);
+    }
+    function bindTocToggle() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .toc-list-item').each(function() {
+        var $li = jQuery(this);
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) {
+          if ($li.children('.toc-toggle').length === 0) {
+            $li.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>');
+          }
+          return;
+        }
+
+        if ($li.children('.toc-toggle').length === 0) {
+          $li.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>');
+        }
+        updateTocToggle($li, $childList);
+      });
+      jQuery('#toc-body').off('click.tocToggle').on('click.tocToggle', '.toc-toggle', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $li = jQuery(this).parent('.toc-list-item');
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) { return; }
+        $childList.toggleClass('tocbot-is-collapsed');
+        updateTocToggle($li, $childList);
+      });
+      if (!window.__tocToggleObserver) {
+        window.__tocToggleObserver = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.type !== 'attributes' || mutation.attributeName !== 'class') { return; }
+            var $list = jQuery(mutation.target);
+            var $li = $list.parent('.toc-list-item');
+            if ($li.length === 0) { return; }
+            updateTocToggle($li, $list);
+          });
+        });
+        jQuery('#toc-body ol').each(function() {
+          window.__tocToggleObserver.observe(this, { attributes: true });
+        });
+      }
+    }
+    var tocConfig = Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc);
+    if (isExpandAllEnabled()) {
+      tocConfig.collapseDepth = 6;
+    }
+    window.tocbot.init(tocConfig);
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+    expandAllToc();
+    bindTocToggle();
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+        expandAllToc();
+        bindTocToggle();
+      }
+    });
+  });
+</script>
+
+
+  <script  src="https://lib.baomitu.com/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" ></script>
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="/js/site-runtime.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

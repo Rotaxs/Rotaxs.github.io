@@ -1,0 +1,1247 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Rotas">
+  <meta name="keywords" content="编程,数学,Python,ArchLinux,C++">
+  
+    <meta name="description" content="本文主要介绍 C 语言中的标准 I&#x2F;O">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深入浅出 C 语言标准 I&#x2F;O">
+<meta property="og:url" content="http://rotaxs.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/C%E8%AF%AD%E8%A8%80/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA-c-%E8%AF%AD%E8%A8%80%E6%A0%87%E5%87%86-i-o/">
+<meta property="og:site_name" content="Rotas&#39;s blogs">
+<meta property="og:description" content="本文主要介绍 C 语言中的标准 I&#x2F;O">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://rotaxs.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/C%E8%AF%AD%E8%A8%80/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA-c-%E8%AF%AD%E8%A8%80%E6%A0%87%E5%87%86-i-o/%E4%BA%8C%E8%BF%9B%E5%88%B6.png">
+<meta property="article:published_time" content="2025-12-30T03:11:08.000Z">
+<meta property="article:modified_time" content="2026-08-25T08:26:06.674Z">
+<meta property="article:author" content="Rotas">
+<meta property="article:tag" content="计算机">
+<meta property="article:tag" content="C语言">
+<meta property="article:tag" content="I&#x2F;O">
+<meta property="article:tag" content="缓冲区">
+<meta property="article:tag" content="输入流">
+<meta property="article:tag" content="输出流">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://rotaxs.github.io/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/C%E8%AF%AD%E8%A8%80/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BA-c-%E8%AF%AD%E8%A8%80%E6%A0%87%E5%87%86-i-o/%E4%BA%8C%E8%BF%9B%E5%88%B6.png">
+  
+  
+  
+  <title>深入浅出 C 语言标准 I/O - Rotas&#39;s blogs</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"rotaxs.github.io","root":"/","version":"1.9.9","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"expand_all":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"openkounter":{"server_url":"https://open-kounter.mintimate.cn","path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Rotas&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content (desktop) -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-note"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-books"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile grid menu overlay -->
+<div id="mobile-grid-menu" class="d-lg-none">
+  <div class="mobile-grid-menu-inner">
+    <div class="container">
+      <div class="row">
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-home-fill"></i>
+                  <span>首页</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/archives/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-note"></i>
+                  <span>归档</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/tags/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-tags-fill"></i>
+                  <span>标签</span>
+                </div>
+              </a>
+            </div>
+          
+        
+          
+          
+          
+          
+            <div class="col-4 mobile-grid-cell">
+              <a href="/categories/" target="_self">
+                <div class="mobile-grid-item">
+                  <i class="iconfont icon-books"></i>
+                  <span>分类</span>
+                </div>
+              </a>
+            </div>
+          
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-search-btn">
+            <a href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-search"></i>
+                <span>搜索</span>
+              </div>
+            </a>
+          </div>
+        
+        
+          <div class="col-4 mobile-grid-cell" id="mobile-color-toggle-btn"
+               data-label-light="开灯"
+               data-label-dark="关灯">
+            <a href="javascript:;" aria-label="Color Toggle">
+              <div class="mobile-grid-item">
+                <i class="iconfont icon-dark" id="mobile-color-toggle-icon"></i>
+                <span id="mobile-color-toggle-label">关灯</span>
+              </div>
+            </a>
+          </div>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/assets/website/banner1.jpg') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="深入浅出 C 语言标准 I/O"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-12-30 11:11" pubdate>
+          2025 年 12 月 30 日, 星期二
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          <!-- compatible with older versions-->
+          6.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          <!-- compatible with older versions-->
+          55 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">深入浅出 C 语言标准 I/O</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="C-语言-I-O-的本质">C 语言 I/O 的本质</h2>
+<blockquote>
+<p><strong>I/O（input/output）</strong>，即输入输出，通常指数据在存储器或其他周边设备之间的输入输出</p>
+<ul class="lvl-1">
+<li class="lvl-2"><strong>输入</strong>指的是数据从外部设备（如键盘、磁盘、网卡）拷贝到内存中</li>
+<li class="lvl-2"><strong>输出</strong>指的是数据从内存拷贝到外部设备中</li>
+</ul>
+</blockquote>
+<p>由于外部设备和内存的不同的规范，C 语言不太可能为每一套设备都写一套 I/O，因此，C 语言 I/O 不直接操作外部设备和内存，而是操作<strong>流（Stream）</strong></p>
+<p>在 C 语言中，流的表现形式为 <code>FILE*</code>，<code>FILE</code> 实际上是一个结构体，里面记录了文件的读写位置，缓冲区状态，以及错误标记等。同时，C 语言通过 <code>FILE*</code> 操作流，C 语言的标准输入输出库（<code>stdio.h</code>）中通过 <code>FILE*</code> 为我们定义了三种常用的流</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>stdin</code>：标准输入流（Standard Input Stream），默认指向键盘</p>
+<ul class="lvl-2">
+<li class="lvl-6">典型函数：<code>scanf()</code>、<code>getchar()</code></li>
+</ul>
+</li>
+<li class="lvl-2">
+<p><code>stdout</code>：标准输出流（Standard Output Stream），默认指向显示器，</p>
+<ul class="lvl-2">
+<li class="lvl-6">典型函数：<code>printf()</code>、<code>putchar()</code></li>
+</ul>
+</li>
+<li class="lvl-2">
+<p><code>stderr</code>：标准错误流（Standard Error Stream），默认指向显示器</p>
+<ul class="lvl-2">
+<li class="lvl-6">典型函数：<code>perror()</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="标准输入输出">标准输入输出</h2>
+<h3 id="格式化-I-O">格式化 I/O</h3>
+<h4 id="格式化输出-printf">格式化输出 <code>printf()</code></h4>
+<p><strong>格式化输出</strong>使用 <code>printf()</code>（print format），其函数原型一般定义如下</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> __cdecl <span class="token function">printf</span><span class="token punctuation">(</span> <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span> __restrict__ _Format<span class="token punctuation">,</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+<p>函数还有一个返回值，表示成功打印的字符总数，如果出错，会返回一个负数</p>
+<p>关于格式化字符，可以参考笔者的这篇文章 <a href="/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/C%E8%AF%AD%E8%A8%80/c-%E8%AF%AD%E8%A8%80%E4%B8%AD%E7%9A%84%E6%A0%BC%E5%BC%8F%E5%8C%96%E8%BE%93%E5%87%BA%E5%92%8C%E8%BD%AC%E4%B9%89%E5%AD%97%E7%AC%A6/" title="C 语言中的格式化输出和转义字符">C语言中的格式化输出和转义字符</a></p>
+<p>有关格式化字符串，我们还可以了解下面两个函数</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">sprintf</span><span class="token punctuation">(</span> <span class="token keyword">char</span><span class="token operator">*</span> restrict buffer<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span> restrict format<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token function">snprintf</span><span class="token punctuation">(</span> <span class="token keyword">char</span><span class="token operator">*</span> restrict buffer<span class="token punctuation">,</span> <span class="token class-name">size_t</span> bufsz<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span> restrict format<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div></figure>
+<p>这两个函数可以将格式化字符串存入到字符串 <code>buffer</code> 中，区别是 <code>snprintf()</code> 可以指定存入的长度，如果写入失败，则返回 <code>EOF</code></p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">char</span> buf<span class="token punctuation">[</span><span class="token number">20</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token comment">// 使用 sprintf（不安全，可能溢出）</span>
+    <span class="token function">sprintf</span><span class="token punctuation">(</span>buf<span class="token punctuation">,</span> <span class="token string">"%d %s %.1f"</span><span class="token punctuation">,</span> <span class="token number">1001</span><span class="token punctuation">,</span> <span class="token string">"zhangsan"</span><span class="token punctuation">,</span> <span class="token number">99.5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"sprintf结果: %s\n"</span><span class="token punctuation">,</span> buf<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 使用 snprintf（安全，限制长度）</span>
+    <span class="token function">snprintf</span><span class="token punctuation">(</span>buf<span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>buf<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">"%d %s %.1f"</span><span class="token punctuation">,</span> <span class="token number">1001</span><span class="token punctuation">,</span> <span class="token string">"zhangsan"</span><span class="token punctuation">,</span> <span class="token number">99.5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"snprintf结果: %s\n"</span><span class="token punctuation">,</span> buf<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<h4 id="格式化输入-scanf">格式化输入 <code>scanf()</code></h4>
+<p><strong>格式化输入</strong>使用 <code>scanf()</code>（scan format），其函数原型如下</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">scanf</span><span class="token punctuation">(</span> <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>restrict format<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+<p>函数的返回值表示成功接收值的变量的个数</p>
+<p>一般来说，我们在使用 <code>scanf()</code> 函数时，都要检查变量是否都被分配了值，比如</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> a<span class="token punctuation">,</span> b<span class="token punctuation">;</span>
+<span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d %d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>a<span class="token punctuation">,</span> <span class="token operator">&amp;</span>b<span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token number">2</span><span class="token punctuation">)</span>
+    <span class="token punctuation">&#123;</span>
+        <span class="token comment">// 输出提示信息</span>
+    <span class="token punctuation">&#125;</span>
+    <span class="token keyword">else</span>
+        <span class="token keyword">break</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<p><strong><code>scanf()</code>会忽略<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-cn/%E7%A9%BA%E7%99%BD%E5%AD%97%E5%85%83">空白字符</a></strong>（如空格，换行，制表符等），如果读取数字，还会忽略前导 0，并从第一个数字字符（0-9）开始读取（并转化为有效数字），到下一个空白字符结束</p>
+<p>以下面的代码举例</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> num<span class="token punctuation">;</span>
+    <span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token function">scanf</span><span class="token punctuation">(</span><span class="token string">"%d"</span><span class="token punctuation">,</span> <span class="token operator">&amp;</span>num<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"num = %d, a = %d"</span><span class="token punctuation">,</span> num<span class="token punctuation">,</span> a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<p>如果输入 <code>p</code>，那么输出为</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-BASH" data-language="BASH"><code class="language-BASH">num &#x3D; -469536704, a &#x3D; 0<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+<p>这里 <code>num</code> 的值与字符 <code>p</code> 没有任何关系，它表示一个垃圾值，<code>a = 0</code> 表示 <code>num</code> 没能被分配值</p>
+<p>如果输入<code> 010</code>，那么输出为</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-BASH" data-language="BASH"><code class="language-BASH">num &#x3D; 10, a &#x3D; 1<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+<p>可以看到，<code>scanf()</code> 忽略了前导空白字符和前导 0，而直接读取了 10，<code>a = 1</code> 表示成功读取一个变量</p>
+<h3 id="字符-I-O">字符 I/O</h3>
+<p>对于字符的输出输出，我们不需要使用 <code>printf()</code> 和 <code>scanf()</code>，毕竟用它们处理字符过于“大材小用”了</p>
+<p>比如在输出换行时，可以直接采用 <code>putchar('\n')</code>，在读取一个字符时，也可以直接使用 <code>char a = getchar()</code>，这样会使得代码更加简洁</p>
+<p>这里需要注意的是，<code>putchar()</code> 和 <code>getchar()</code> 返回或接收的都是 <code>int</code> 类型，可以直接对应字符的 ASCII 码值，但是当输出或输入失败的时候，会返回 <code>EOF</code>（一般是 -1）</p>
+<div class="note note-info">
+            <p><strong>EOF（End Of File）</strong>：当 <code>scanf()</code>，<code>getchar()</code> 等读取数据时发现没东西可读时，会返回 <code>EOF</code>，这是一个定义在 <code>stdio.h</code> 中的宏，通常为 -1。在 Windows 中，我们可以通过 <code>Ctrl + Z</code>（Linux/MaxOS 是 <code>Ctrl + D</code>）模拟发送一个 <code>EOF</code></p> 
+          </div>
+<p>对缓冲机制感兴趣的读者可移步至 <a href="#buffer">缓冲机制</a></p>
+<h3 id="字符串-I-O">字符串 I/O</h3>
+<h4 id="字符串输入">字符串输入</h4>
+<p>当我们想读取含有空格的字符串时，<code>scanf()</code> 似乎不太能实现，通过循环 + <code>getchar()</code> 又过于繁琐，这里我们可以使用 <code>fgets()</code> 函数，其函数原型如下</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">char</span><span class="token operator">*</span> <span class="token function">fgets</span><span class="token punctuation">(</span> <span class="token keyword">char</span><span class="token operator">*</span> restrict str<span class="token punctuation">,</span> <span class="token keyword">int</span> count<span class="token punctuation">,</span> FILE<span class="token operator">*</span> restrict stream <span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+<p>参数</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>str</code>：字符串</p>
+</li>
+<li class="lvl-2">
+<p><code>count</code>：字符数组的长度（包括最后的<code>\0</code>，即字符串的长度 + 1）</p>
+</li>
+<li class="lvl-2">
+<p><code>stream</code>：输入流（标准输入流或文件流）</p>
+</li>
+</ul>
+<p>如果读取成功，返回 <code>str</code>，否则返回空指针</p>
+<div class="note note-warning">
+            <p>需要注意的是，有的读者可能见过 <code>gets()</code> 函数，但这个函数不安全，且在现代 C 标准中已经被废弃了</p> 
+          </div>
+<h4 id="字符串输出">字符串输出</h4>
+<p>字符串输出可以使用 <code>puts()</code> 和 <code>fputs()</code> 函数，它们的函数原型如下</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">puts</span><span class="token punctuation">(</span> <span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span> str <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token function">fputs</span><span class="token punctuation">(</span> <span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span> restrict str<span class="token punctuation">,</span> FILE<span class="token operator">*</span> restrict stream <span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div></figure>
+<p>这两个函数最大的区别是前者不需要指定输出流（默认为 <code>stdout</code>）</p>
+<p>除此之外，还需要知道的是，它们都以 <code>\0</code> 作为字符串的结束，但是 <code>puts()</code> 会在结束时多加一个 <code>\n</code></p>
+<p>如果输出成功，返回一个非负数，否则返回 <code>EOF</code></p>
+<h2 id="文件输入输出">文件输入输出</h2>
+<h3 id="打开和关闭文件">打开和关闭文件</h3>
+<p>使用 <code>fopen()</code> 函数可以创建一个文件流指针（全缓冲，如果失败，返回空指针），函数原型如下</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c">FILE <span class="token operator">*</span><span class="token function">fopen</span><span class="token punctuation">(</span> <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>restrict filename<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>restrict mode <span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>filename</code>：要打开的文件的路径</p>
+</li>
+<li class="lvl-2">
+<p><code>mode</code>：文件的打开方式，常用的打开方式如下</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">模式</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><code>r</code></td>
+<td style="text-align:left">只读模式</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>w</code></td>
+<td style="text-align:left">只写模式，如果文件不存在，则创建该文件；如果存在，则会将原文件清空</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>a</code></td>
+<td style="text-align:left">追加模式，如果文件不存在，则创建该文件</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>r+</code></td>
+<td style="text-align:left">读写模式</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>w+</code></td>
+<td style="text-align:left">读写模式，果文件不存在，则创建该文件；如果存在，则会将原文件清空</td>
+</tr>
+<tr>
+<td style="text-align:center"><code>a+</code></td>
+<td style="text-align:left">读写模式，果文件不存在，则创建该文件；如果存在，则在原文件后追加内容</td>
+</tr>
+</tbody>
+</table>
+<p>特殊的，如果处理的是二进制文件，则在后面加<code>b</code>，如<code>rb</code>，<code>r+b</code>（<code>rb+</code>）</p>
+<p>在文件操作结束后，要用<code>fclose()</code>函数关闭文件，将缓冲区数据写入磁盘，如</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c">FILE <span class="token operator">*</span>fp <span class="token operator">=</span> <span class="token function">fopen</span><span class="token punctuation">(</span><span class="token string">"./test.txt"</span><span class="token punctuation">,</span> <span class="token string">"w"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// 好习惯</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>fp <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+    <span class="token function">perror</span><span class="token punctuation">(</span><span class="token string">"打开文件失败"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// 操作文件......</span>
+
+<span class="token function">fclose</span><span class="token punctuation">(</span>fp<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<h3 id="读取和写入文件">读取和写入文件</h3>
+<p>在前面的标准输入输出部分，我们 <code>fgets()</code> 和 <code>fputs()</code> 可以指定输入流和输出流，因此，只要将流换成文件流就可以实现文件的 I/O</p>
+<p>此外，我们还可以用 <code>fprintf()</code> 和 <code>fscanf()</code> 进行格式化读取和写入，它们的函数原型如下</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">fprintf</span><span class="token punctuation">(</span> FILE<span class="token operator">*</span> restrict stream<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">char</span><span class="token operator">*</span> restrict format<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword">int</span> <span class="token function">fscanf</span><span class="token punctuation">(</span> FILE <span class="token operator">*</span>restrict stream<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>restrict format<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div></figure>
+<p>它们的用法与 <code>printf()</code> 和 <code>scanf()</code> 一样，只是将第一个参数换成了流（还要注意 <code>FILE*</code> 的模式的对应），比如</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">char</span> <span class="token operator">*</span>str <span class="token operator">=</span> <span class="token string">"This is a apple"</span><span class="token punctuation">;</span>
+    <span class="token comment">// 用 只写 的方式打开</span>
+    FILE <span class="token operator">*</span>fp <span class="token operator">=</span> <span class="token function">fopen</span><span class="token punctuation">(</span><span class="token string">"./test.txt"</span><span class="token punctuation">,</span> <span class="token string">"w"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>fp <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+        <span class="token function">perror</span><span class="token punctuation">(</span><span class="token string">"打开文件失败"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">fprintf</span><span class="token punctuation">(</span>fp<span class="token punctuation">,</span> <span class="token string">"%s\n"</span><span class="token punctuation">,</span> str<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">fclose</span><span class="token punctuation">(</span>fp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">char</span> thing<span class="token punctuation">[</span><span class="token number">20</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token comment">// 用 只读 的方式打开</span>
+    fp <span class="token operator">=</span> <span class="token function">fopen</span><span class="token punctuation">(</span><span class="token string">"./test.txt"</span><span class="token punctuation">,</span> <span class="token string">"r"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>fp <span class="token operator">==</span> <span class="token constant">NULL</span><span class="token punctuation">)</span>
+        <span class="token function">perror</span><span class="token punctuation">(</span><span class="token string">"打开文件失败"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">fscanf</span><span class="token punctuation">(</span>fp<span class="token punctuation">,</span> <span class="token string">"This is a %s"</span><span class="token punctuation">,</span> thing<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">fclose</span><span class="token punctuation">(</span>fp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"I know it is a %s\n"</span><span class="token punctuation">,</span> thing<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<p>这个程序的输出为</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-BASH" data-language="BASH"><code class="language-BASH">I know it is a apple
+<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+<h3 id="读取和写入二进制文件">读取和写入二进制文件</h3>
+<p>读写二进制文件，我们用到下面两个函数</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token class-name">size_t</span> <span class="token function">fread</span><span class="token punctuation">(</span> <span class="token keyword">void</span> <span class="token operator">*</span>restrict buffer<span class="token punctuation">,</span> <span class="token class-name">size_t</span> size<span class="token punctuation">,</span> <span class="token class-name">size_t</span> count<span class="token punctuation">,</span> FILE <span class="token operator">*</span>restrict stream <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token class-name">size_t</span> <span class="token function">fwrite</span><span class="token punctuation">(</span> <span class="token keyword">const</span> <span class="token keyword">void</span><span class="token operator">*</span> restrict buffer<span class="token punctuation">,</span> <span class="token class-name">size_t</span> size<span class="token punctuation">,</span> <span class="token class-name">size_t</span> count<span class="token punctuation">,</span> FILE<span class="token operator">*</span> restrict stream <span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></div></figure>
+<p>参数</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>buffer</code>：表示读取/传入数据的指针</p>
+</li>
+<li class="lvl-2">
+<p><code>size</code>：表示每个数据的大小</p>
+</li>
+<li class="lvl-2">
+<p><code>count</code>：表示数据的个数</p>
+</li>
+<li class="lvl-2">
+<p><code>stream</code>：表示流</p>
+</li>
+</ul>
+<p>如果成功，返回读取/写入的数据的个数</p>
+<p>可以看出，这两个函数适合存大量相同数据，比如数组，参见下面的代码</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> arr<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">&#123;</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">&#125;</span><span class="token punctuation">;</span>
+    FILE <span class="token operator">*</span>fp <span class="token operator">=</span> <span class="token function">fopen</span><span class="token punctuation">(</span><span class="token string">"./test.dat"</span><span class="token punctuation">,</span> <span class="token string">"w"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// arr 是第一个元素的地址</span>
+    <span class="token function">fwrite</span><span class="token punctuation">(</span>arr<span class="token punctuation">,</span> <span class="token keyword">sizeof</span><span class="token punctuation">(</span>arr<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> fp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">fclose</span><span class="token punctuation">(</span>fp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<p>得到的 <code>test.dat</code> 文件内容如下</p>
+<p><img src="%E4%BA%8C%E8%BF%9B%E5%88%B6.png" srcset="/img/loading.gif" lazyload alt="图一：test.dat"></p>
+<h2 id="缓冲机制">缓冲机制</h2>
+<p id="buffer"></p>
+<h3 id="缓冲区">缓冲区</h3>
+<blockquote>
+<p><strong>缓冲区</strong>（buffer）是内存空间的一部分。也就是说，在内存空间中预留了一定的存储空间，这些存储空间用来缓冲输入或输出的数据，这部分预留的空间就叫做缓冲区，显然缓冲区是具有一定大小的。缓冲区根据其对应的是输入设备还是输出设备，分为<strong>输入缓冲区</strong>和<strong>输出缓冲区</strong>。</p>
+</blockquote>
+<p>实际上，我们调用 <code>printf()</code>，数据只是被内存拷贝到了 <code>FILE</code> 结构体所指向的一块内存区域（缓冲区），此时，操作系统和硬件根本不知道这些数据的存在</p>
+<p>接下来只要刷新缓冲区（或缓冲区满了），例如调用函数 <code>fflush(stdout)</code>，内容就可以被输出到控制台上</p>
+<p><strong>为什么要设置缓冲区？</strong></p>
+<ol>
+<li class="lvl-3">
+<p>输入设备的角度：缓冲区中的数据可以作为一整个“块”发送到指定位置，比逐个发送数据要节约时间，同时也可以减少读写次数</p>
+</li>
+<li class="lvl-3">
+<p>输出设备的角度：当输出设备的运行很慢时，高速设备可以直接将数据发送到缓冲区，然后输出设备直接从缓冲区读取数据即可，如打印机</p>
+</li>
+</ol>
+<blockquote>
+<p>可以把缓冲区理解为一个特定大小的字符串，其大小通常为 512 字节或它的倍数</p>
+</blockquote>
+<h3 id="缓冲区的类型">缓冲区的类型</h3>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><strong>全缓冲（Fully Buffered）</strong>：只有缓冲区彻底满了，才会进行实际的 I/O</p>
+<ul class="lvl-2">
+<li class="lvl-6">文件的读写就是全缓冲，比如打开磁盘文件的 <code>fopen()</code></li>
+<li class="lvl-6">因为磁盘的读写非常缓慢，并且反复的读写会减少磁盘的寿命，因此，<code>fopen()</code> 默认分配一个较大的缓冲区（由<code>FILE*</code>指向）</li>
+<li class="lvl-6">因此，如果 <code>fopen()</code> 后没有 <code>fclose()</code>，数据就会永远停留在缓冲区；反之，如果调用 <code>fclose()</code>，即使缓冲区没满，数据也会从缓冲区写入磁盘</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p><strong>行缓冲（Line Buffered）</strong>：遇到换行符或缓冲区满时，才进行实际 I/O</p>
+<ul class="lvl-2">
+<li class="lvl-6"><code>stdout</code> 就是行缓冲，因此每次 <code>printf()</code> 最后加一个 <code>\n</code> 实际上也表示将数据发送到控制台</li>
+<li class="lvl-6">但是，现在很多系统会自动刷新缓冲区，导致即使不加 <code>\n</code>，通过 <code>printf</code> 进入缓冲区的数据也会即刻显示在控制台（即编译器可能会根据场景，自动将 <code>stdout</code> 设置为无缓冲）</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p><strong>无缓冲（Unbufferd）</strong>：数据立即发送，不经过任何停留</p>
+<ul class="lvl-2">
+<li class="lvl-6">标准错误流 <code>stderr</code> 就是无缓冲，这样有利于将错误尽快的显示出来</li>
+</ul>
+</li>
+</ul>
+<h3 id="一个较为复杂的缓冲机制的例子">一个较为复杂的缓冲机制的例子</h3>
+<p>想象一个场景：我们在一个文本编辑器中输入文字</p>
+<p>接下来我们探究这里面的缓冲机制</p>
+<ol>
+<li class="lvl-3">
+<p>首先我们按下键盘的一个字符（此时键盘是输入设备）</p>
+</li>
+<li class="lvl-3">
+<p>操作系统的缓冲区接收到这个字符的数据</p>
+</li>
+<li class="lvl-3">
+<p>文本编辑器软件在系统缓冲区中拿到这个数据（此时文本编辑器是输出设备）</p>
+</li>
+<li class="lvl-3">
+<p>文本编辑器将这个数据加载（行缓冲）到自己的缓冲区（此时文本编辑器是输入设备）</p>
+</li>
+<li class="lvl-3">
+<p>文本编辑器通过图形接口将这个字符在显示上画（行缓冲）出来（此时显示器是输出设备）</p>
+</li>
+<li class="lvl-3">
+<p>保存文件时，文本编辑器将字符写入（全缓冲）磁盘文件（此时硬盘是输出设备）</p>
+</li>
+</ol>
+<h3 id="C-语言中的缓冲区“陷阱”">C 语言中的缓冲区“陷阱”</h3>
+<p>前面我们提到过，<code>scanf()</code> 在读取到空白字符之前就会停止读取，因此，我们输入完之后的回车就会滞留在缓冲区中，当我们下次读取字符时，就有可能出错</p>
+<p>因此，当我们每次读完字符后（尤其是字符和字符串），需要养成刷新缓冲区的习惯</p>
+<p>我们可以用如下代码实现缓冲区的刷新</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">void</span> <span class="token function">flush_buffer</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token keyword">int</span> ch<span class="token punctuation">;</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>ch <span class="token operator">=</span> <span class="token function">getchar</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">!=</span> <span class="token char">'\n'</span> <span class="token operator">&amp;&amp;</span> ch <span class="token operator">!=</span> <span class="token constant">EOF</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<p>注意这里的<code>ch</code>是<code>int</code>而不是<code>char</code></p>
+<div class="note note-warning">
+            <p>需要注意的是，<code>fflush(stdin)</code>这种写法是未定义的，因此不建议在代码中写这样的语句</p> 
+          </div>
+<h3 id="使用-setvbuf-函数设置流的缓冲模式">使用 <code>setvbuf()</code> 函数设置流的缓冲模式</h3>
+<p>运行下面的代码</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;unistd.h></span></span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Hello world"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<p>如果你发现，程序先输出 <code>Hello world</code>，然后停了 2 秒程序再结束，说明你的 <code>stdout</code> 是无缓冲</p>
+<p>我们可以通过下面的函数将其改回行缓冲</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span> <span class="token function">setvbuf</span><span class="token punctuation">(</span> FILE <span class="token operator">*</span>restrict stream<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>restrict buffer<span class="token punctuation">,</span> <span class="token keyword">int</span> mode<span class="token punctuation">,</span> <span class="token class-name">size_t</span> size <span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+<p>参数</p>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><code>stream</code>：流</p>
+</li>
+<li class="lvl-2">
+<p><code>buffer</code>：自定义缓冲区，也可以传空指针</p>
+</li>
+<li class="lvl-2">
+<p><code>mode</code>：缓冲模式</p>
+<ul class="lvl-2">
+<li class="lvl-6"><code>_IOFBF</code>：全缓冲</li>
+<li class="lvl-6"><code>_IOLBF</code>：行缓冲</li>
+<li class="lvl-6"><code>_IONBF</code>：无缓冲</li>
+</ul>
+</li>
+<li class="lvl-2">
+<p><code>size</code>：缓冲区大小</p>
+<ul class="lvl-2">
+<li class="lvl-6">若<code>buffer</code>为空指针，则<strong>重设默认缓冲区的大小为<code>size</code></strong></li>
+<li class="lvl-6">若<code>buffer</code>为非空指针，则将缓冲区设置为由<code>buffer</code>开始，大小为<code>size</code>的区域</li>
+</ul>
+</li>
+</ul>
+<p>设置成功，返回 0；否则返回非 0</p>
+<p>具体操作方法如下</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-c" data-language="c"><code class="language-c"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;stdio.h></span></span>
+<span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&lt;unistd.h></span></span>
+<span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+    <span class="token comment">// 自定义缓冲区</span>
+    <span class="token keyword">const</span> <span class="token keyword">int</span> N <span class="token operator">=</span> <span class="token number">1024</span><span class="token punctuation">;</span>
+    <span class="token keyword">char</span> buf<span class="token punctuation">[</span>N<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token function">setvbuf</span><span class="token punctuation">(</span><span class="token constant">stdout</span><span class="token punctuation">,</span> buf<span class="token punctuation">,</span> _IOLBF<span class="token punctuation">,</span> N<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"Hello world"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// 刷新缓冲区</span>
+    <span class="token function">fflush</span><span class="token punctuation">(</span><span class="token constant">stdout</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
+<p>这时会发现程序启动后先停了 2 秒，然后才输出<code>Hello world</code></p>
+<h2 id="参考链接">参考链接</h2>
+<ul class="lvl-0">
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/I/O">Wikipedia - I/O</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-cn/%E7%A9%BA%E7%99%BD%E5%AD%97%E5%85%83">Wikipeida - 空白字符</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/c/io/FILE">cppreference - FILE</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/c/io/fopen">cppreference - fopen, fopen_s</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/c/io/fprintf">cppreference - printf, fprintf, sprintf, snprintf, printf_s, fprintf_s, sprintf_s, snprintf_s</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/c/io/fscanf">cppreference - scanf, fscanf, sscanf, scanf_s, fscanf_s, sscanf_s</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/c/io/fgets">cppreference - fgets</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/c/io/fputs.html">cppreference - fputs</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/c/io/fwrite">cppreference - fwrite</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://en.cppreference.com/w/c/io/fread">cppreference - fread</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://cppreference.cn/w/c/io/setvbuf">cppreference - setvbuf</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://geekdaxue.co/read/thsea@linux/5a3611b1-2916-488f-8be9-6995d2446032#9cdz5p">缓冲区(buffer)与缓存(cache)</a></p>
+</li>
+<li class="lvl-2">
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42402664/article/details/150553213">CSDN - 深入理解C语言中的fread与fwrite函数</a></p>
+</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/" class="category-chain-item">计算机科学</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/C%E8%AF%AD%E8%A8%80/" class="category-chain-item">C语言</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/computer/" class="print-no-link">#计算机</a>
+      
+        <a href="/tags/C%E8%AF%AD%E8%A8%80/" class="print-no-link">#C语言</a>
+      
+        <a href="/tags/I-O/" class="print-no-link">#I/O</a>
+      
+        <a href="/tags/%E7%BC%93%E5%86%B2%E5%8C%BA/" class="print-no-link">#缓冲区</a>
+      
+        <a href="/tags/%E8%BE%93%E5%85%A5%E6%B5%81/" class="print-no-link">#输入流</a>
+      
+        <a href="/tags/%E8%BE%93%E5%87%BA%E6%B5%81/" class="print-no-link">#输出流</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>深入浅出 C 语言标准 I/O</div>
+      <div>http://rotaxs.github.io/计算机科学/C语言/深入浅出-c-语言标准-i-o/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Rotas</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年12月30日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/math/%E5%BE%AE%E7%A7%AF%E5%88%86/%E4%B8%80%E6%96%87%E6%90%9E%E6%87%82%E5%8F%8D%E5%87%BD%E6%95%B0%E5%92%8C%E5%8F%8D%E5%87%BD%E6%95%B0%E6%B1%82%E5%AF%BC/" title="一文搞懂反函数和反函数求导">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">一文搞懂反函数和反函数求导</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/math/%E5%BE%AE%E7%A7%AF%E5%88%86/%E6%94%B6%E9%9B%86%E4%B8%80%E4%BA%9B%E6%9C%89%E8%B6%A3%E7%9A%84%E6%9D%82%E9%A2%98/" title="收集一些有趣的杂题">
+                        <span class="hidden-mobile">收集一些有趣的杂题</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <br> <span id="site-run-time">网站已运行 0 天</span> <br> <span id="site-total-words">博客总字数 119,164 字</span> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    function isExpandAllEnabled() {
+      return CONFIG.toc && CONFIG.toc.expand_all === true;
+    }
+    function expandAllToc() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .tocbot-is-collapsed').removeClass('tocbot-is-collapsed');
+    }
+    function updateTocToggle($li, $childList) {
+      var $toggle = $li.children('.toc-toggle');
+      if ($toggle.length === 0) { return; }
+      var collapsed = $childList.hasClass('tocbot-is-collapsed');
+      $toggle
+        .toggleClass('toc-toggle-collapsed', collapsed)
+        .toggleClass('toc-toggle-expanded', !collapsed);
+    }
+    function bindTocToggle() {
+      if (!isExpandAllEnabled()) { return; }
+      jQuery('#toc-body .toc-list-item').each(function() {
+        var $li = jQuery(this);
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) {
+          if ($li.children('.toc-toggle').length === 0) {
+            $li.prepend('<span class="toc-toggle toc-toggle-placeholder" aria-hidden="true">›</span>');
+          }
+          return;
+        }
+
+        if ($li.children('.toc-toggle').length === 0) {
+          $li.prepend('<span class="toc-toggle toc-toggle-expanded" aria-hidden="true">›</span>');
+        }
+        updateTocToggle($li, $childList);
+      });
+      jQuery('#toc-body').off('click.tocToggle').on('click.tocToggle', '.toc-toggle', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var $li = jQuery(this).parent('.toc-list-item');
+        var $childList = $li.children('ol');
+        if ($childList.length === 0) { return; }
+        $childList.toggleClass('tocbot-is-collapsed');
+        updateTocToggle($li, $childList);
+      });
+      if (!window.__tocToggleObserver) {
+        window.__tocToggleObserver = new MutationObserver(function(mutations) {
+          mutations.forEach(function(mutation) {
+            if (mutation.type !== 'attributes' || mutation.attributeName !== 'class') { return; }
+            var $list = jQuery(mutation.target);
+            var $li = $list.parent('.toc-list-item');
+            if ($li.length === 0) { return; }
+            updateTocToggle($li, $list);
+          });
+        });
+        jQuery('#toc-body ol').each(function() {
+          window.__tocToggleObserver.observe(this, { attributes: true });
+        });
+      }
+    }
+    var tocConfig = Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc);
+    if (isExpandAllEnabled()) {
+      tocConfig.collapseDepth = 6;
+    }
+    window.tocbot.init(tocConfig);
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+    expandAllToc();
+    bindTocToggle();
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+        expandAllToc();
+        bindTocToggle();
+      }
+    });
+  });
+</script>
+
+
+  <script  src="https://lib.baomitu.com/prism/1.29.0/plugins/line-numbers/prism-line-numbers.min.js" ></script>
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="/js/site-runtime.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
