@@ -1,7 +1,7 @@
 ---
 title: g++ 和 gdb 的使用方法介绍
 date: 2026-08-25 16:42:47
-description: 本文介绍如何使用 g++ 编译 C++ 源文件，最后再
+description: 本文介绍如何使用 g++ 编译 C++ 源文件，以及使用 gdb 调试编译好的二进制程序，最后稍微谈点 nm 工具
 tags: [C++, g++, gdb, nm]
 categories: [计算机科学, C++]
 sticky:
