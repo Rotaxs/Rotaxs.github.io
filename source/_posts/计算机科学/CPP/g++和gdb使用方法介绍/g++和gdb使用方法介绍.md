@@ -114,6 +114,38 @@ g++ src/main.cpp -L./lib -lcalcualtor -o main
 g++ main.c -Wl,-Bstatic -lfoo -Wl,-Bdynamic -lbar
 ```
 
+### `pkg-config`
+
+对于**第三方库**，比如 `Qt6Widgets`，可以利用系统自带的 `pkg-config` 命令查找需要引入的头文件文件夹和库文件文件夹
+
+```bash
+pkg-config --cflags --libs Qt6Widgets
+```
+
+`--cflags` 表示查找头文件文件夹，`--libs` 表示查找库文件文件夹，输出如下
+
+```text
+-I/usr/include/qt6/QtWidgets -I/usr/include/qt6 -DQT_WIDGETS_LIB -I/usr/include/qt6/QtGui -DQT_GUI_LIB -I/usr/include/qt6/QtCore -DQT_CORE_LIB -I/usr/lib/qt6/mkspecs/linux-g++ -lQt6Widgets -lQt6Gui -lQt6Core
+```
+
+一般来说，我们可以这样使用
+
+```bash
+g++ main.cpp `pkg-config --cflags --libs Qt6Widgets` -o main
+```
+
+使用 `ldd` 工具可以查看所有链接的库
+
+```bash
+ldd main
+```
+
+此外，如果要查看所有的包，可以使用
+
+```bash
+pkg-config --list-all
+```
+
 ### 指定 C++ 语言标准 `-std=`
 
 `std=c++11` 表示使用 C++11 标准，类似的还有 `c++14`,`c++17`,`c++20`,`c++23`
