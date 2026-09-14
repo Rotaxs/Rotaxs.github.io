@@ -193,23 +193,23 @@ target_xxx( <target_name>  <PRIVATE|PUBLIC|INTERFACE>  <item1> <item2>... )
 
 以下是一些常用的 `target_*` 指令
 
-| Target 指令 | 作用 | 对应 `g++` 指令 |
-|:---:|:---:|:---:|
-| `target_include_directories` | 绑定头文件搜索路径 | `g++ -c -I/path/to/include` |
-| `target_compile_options` | 传递原生编译器选项（如警告、优化等） | `g++ -Wall -Wextra -O2` |
-| `target_link_libraries` | 绑定依赖库 | `g++ main.o -lmath -o app` |
-| `target_compile_features` | 声明 C++ 语言标准需求（如 `cxx_std_17`） | 自动转为 `g++ -std=c++17` |
-| `target_sources` | 指定参与编译个源文件 | `g++ -c` |
+|         Target 指令          |                   作用                   |       对应 `g++` 指令       |
+| :--------------------------: | :--------------------------------------: | :-------------------------: |
+| `target_include_directories` |            绑定头文件搜索路径            | `g++ -c -I/path/to/include` |
+|   `target_compile_options`   |   传递原生编译器选项（如警告、优化等）   |   `g++ -Wall -Wextra -O2`   |
+|   `target_link_libraries`    |                绑定依赖库                | `g++ main.o -lmath -o app`  |
+|  `target_compile_features`   | 声明 C++ 语言标准需求（如 `cxx_std_17`） |  自动转为 `g++ -std=c++17`  |
+|       `target_sources`       |           指定参与编译个源文件           |          `g++ -c`           |
 
 ### 作用域
 
 首先看看下表
 
-| 关键字 | 作用于当前 target | 传递给下游 target | 典型场景 |
-|:---:|:---:|:---:|:---:|
-| `PRIVATE` | `Yes` | `No` | 仅在 `.cpp` 中使用的内部实现细节 |
-| `PUBLIC` | `Yes` | `Yes` | 在公共头文件暴露的依赖 |
-| `INTERFACE` | `No` | `Yes` | Header-Only 库或仅对使用者生效的规则 |
+|   关键字    | 作用于当前 target | 传递给下游 target |               典型场景               |
+| :---------: | :---------------: | :---------------: | :----------------------------------: |
+|  `PRIVATE`  |       `Yes`       |       `No`        |   仅在 `.cpp` 中使用的内部实现细节   |
+|  `PUBLIC`   |       `Yes`       |       `Yes`       |        在公共头文件暴露的依赖        |
+| `INTERFACE` |       `No`        |       `Yes`       | Header-Only 库或仅对使用者生效的规则 |
 
 举例
 
@@ -326,12 +326,12 @@ Generator 是决定 CMake 把 `CMakeLists.txt` 转换成哪种底层构建工具
 
 常见的 Generator 分类
 
-| Generator 名称 | 产出的配置文件 | 对应底层构建工具 |
-|:---:|:---|:---:|
-| Unix Makefile | `Makefile` | `make` |
-| Ninja | `build.ninja` | `ninja` |
-| Visual Studio... | `.sln`/`.vcxproj` | `MSBuild` |
-| Xcode | `xcodeproj` | `xcodebuild` |
+|  Generator 名称  | 产出的配置文件    | 对应底层构建工具 |
+| :--------------: | :---------------- | :--------------: |
+|  Unix Makefile   | `Makefile`        |      `make`      |
+|      Ninja       | `build.ninja`     |     `ninja`      |
+| Visual Studio... | `.sln`/`.vcxproj` |    `MSBuild`     |
+|      Xcode       | `xcodeproj`       |   `xcodebuild`   |
 
 可以使用 `cmake --help` 查看当前所用的 Generator （带 `*` 的）
 
@@ -355,4 +355,84 @@ cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
 cmake --build build --config Release
 ```
 
+## 最终模板
+
+这里给出一份 `CMakeLists.txt` 的最终模板
+
+```cmake
+cmake_minimum_required(VERSION 3.20)
+
+project(
+    MyProject
+    VERSION 1.0.0
+    LANGUAGES CXX
+)
+
+# --------------------------------------------------
+# Target
+# --------------------------------------------------
+
+add_executable(${PROJECT_NAME})
+
+target_sources(${PROJECT_NAME}
+    PRIVATE
+        src/main.cpp
+)
+
+# --------------------------------------------------
+# Language
+# --------------------------------------------------
+
+target_compile_features(${PROJECT_NAME}
+    PRIVATE
+        cxx_std_20
+)
+
+# --------------------------------------------------
+# Include
+# --------------------------------------------------
+
+target_include_directories(${PROJECT_NAME}
+    PRIVATE
+        ${PROJECT_SOURCE_DIR}/include
+)
+
+# --------------------------------------------------
+# Compile definitions
+# --------------------------------------------------
+
+target_compile_definitions(${PROJECT_NAME}
+    PRIVATE
+        $<$<CONFIG:Debug>:DEBUG>
+)
+
+# --------------------------------------------------
+# Warnings
+# --------------------------------------------------
+
+if(MSVC)
+    target_compile_options(${PROJECT_NAME}
+        PRIVATE
+            /W4
+    )
+else()
+    target_compile_options(${PROJECT_NAME}
+        PRIVATE
+            -Wall
+            -Wextra
+            -Wpedantic
+    )
+endif()
+
+# --------------------------------------------------
+# Dependencies
+# --------------------------------------------------
+
+# find_package(...)
+#
+# target_link_libraries(${PROJECT_NAME}
+#     PRIVATE
+#         xxx::xxx
+# )
+```
 
