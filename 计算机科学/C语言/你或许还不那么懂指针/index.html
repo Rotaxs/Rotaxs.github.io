@@ -27,7 +27,7 @@
 <meta property="og:description" content="介绍关于指针更加进阶的技巧，包括指针常量、常量指针、函数指针、空指针、悬挂指针、野指针、数组退化、函数退化等">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-02-13T06:44:56.000Z">
-<meta property="article:modified_time" content="2026-08-25T08:26:06.673Z">
+<meta property="article:modified_time" content="2026-08-30T02:57:56.219Z">
 <meta property="article:author" content="Rotas">
 <meta property="article:tag" content="计算机">
 <meta property="article:tag" content="C语言">
@@ -501,7 +501,7 @@ p1 <span class="token operator">=</span> p2 <span class="token comment">// p1 �
 <h3 id="空指针">空指针</h3>
 <p><strong>空指针</strong>（Null Pointer）即明确指向“无”的指针</p>
 <p>在 C 语言中定义为 <code>NULL</code>（本质是一个宏），而在 C++11 后使用 <code>nullptr</code></p>
-<p>空指针不能解引用，因此在对一个指针进行解引用时需要判断是否为空指针，但是判断空指针的前提是该指针不是野指针</p>
+<p>空指针不能解引用，因此在对一个指针进行解引用时需要判断是否为空指针，但是判断空指针的前提是该指针不是野指针或悬挂指针</p>
 <p>因此一般在一个指针（如函数指针）初始化时，我们用空指针进行占位，否则就会变成野指针</p>
 <h3 id="野指针">野指针</h3>
 <p><strong>野指针</strong>（Wild Pointer）即未初始化的指针</p>
@@ -539,6 +539,7 @@ Node <span class="token operator">*</span>node2 <span class="token operator">=</
 <span class="token function">free</span><span class="token punctuation">(</span>node2<span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></div></figure>
 <h3 id="悬空指针">悬空指针</h3>
 <p>当一个指针变量 <code>p</code> 指向的内存中的值被释放（手动释放或自动释放）后，<code>p</code> 仍然指向该地址，而地址中的值都是些垃圾值，此时 <code>p</code> 就成为了<strong>悬空指针（Dangling Pointer）</strong></p>
+<p>在用 <code>free(p)</code> 释放指针后，让指针为空 <code>p = NULL</code>，避免指针悬挂</p>
 <div class="note note-primary">
             <p>这里我们发现悬空指针和野指针差不多，但是前者是本来有值，但是后来被释放了；一个是本来就没有值</p> 
           </div>
@@ -992,7 +993,7 @@ a + <span class="token number">1</span> <span class="token operator">=</span> 00
     <div class="footer-inner">
   
     <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <br> <span id="site-run-time">网站已运行 0 天</span> <br> <span id="site-total-words">博客总字数 124,674 字</span> 
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <br> <span id="site-run-time">网站已运行 0 天</span> <br> <span id="site-total-words">博客总字数 126,565 字</span> 
     </div>
   
   

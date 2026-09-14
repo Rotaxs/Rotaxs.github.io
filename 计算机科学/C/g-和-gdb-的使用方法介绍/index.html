@@ -27,7 +27,7 @@
 <meta property="og:description" content="本文介绍如何使用 g++ 编译 C++ 源文件，以及使用 gdb 调试编译好的二进制程序，最后稍微谈点 nm 工具">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2026-08-25T08:42:47.000Z">
-<meta property="article:modified_time" content="2026-08-25T13:34:36.577Z">
+<meta property="article:modified_time" content="2026-08-30T01:21:39.807Z">
 <meta property="article:author" content="Rotas">
 <meta property="article:tag" content="C++">
 <meta property="article:tag" content="g++">
@@ -310,7 +310,7 @@
         <i class="iconfont icon-chart"></i>
         
           <!-- compatible with older versions-->
-          4k 字
+          4.5k 字
         
       </span>
     
@@ -322,7 +322,7 @@
         
         
           <!-- compatible with older versions-->
-          34 分钟
+          38 分钟
         
       </span>
     
@@ -439,6 +439,17 @@
 <p>如果存在同名的动态库和静态库，会优先使用静态库</p>
 <p>但是可以通过，<code>-Wl,-Bstatic</code> 和 <code>-Wl,-Bdynamic</code> 指定后面使用静态库/动态库</p>
 <figure><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">g++ main.c -Wl,-Bstatic <span class="token parameter variable">-lfoo</span> -Wl,-Bdynamic <span class="token parameter variable">-lbar</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+<h3 id="pkg-config"><code>pkg-config</code></h3>
+<p>对于<strong>第三方库</strong>，比如 <code>Qt6Widgets</code>，可以利用系统自带的 <code>pkg-config</code> 命令查找需要引入的头文件文件夹和库文件文件夹</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pkg-config <span class="token parameter variable">--cflags</span> <span class="token parameter variable">--libs</span> Qt6Widgets<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+<p><code>--cflags</code> 表示查找头文件文件夹，<code>--libs</code> 表示查找库文件文件夹，输出如下</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-text" data-language="text"><code class="language-text">-I/usr/include/qt6/QtWidgets -I/usr/include/qt6 -DQT_WIDGETS_LIB -I/usr/include/qt6/QtGui -DQT_GUI_LIB -I/usr/include/qt6/QtCore -DQT_CORE_LIB -I/usr/lib/qt6/mkspecs/linux-g++ -lQt6Widgets -lQt6Gui -lQt6Core<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+<p>一般来说，我们可以这样使用</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">g++ main.cpp <span class="token variable"><span class="token variable">`</span>pkg-config <span class="token parameter variable">--cflags</span> <span class="token parameter variable">--libs</span> Qt6Widgets<span class="token variable">`</span></span> <span class="token parameter variable">-o</span> main<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+<p>使用 <code>ldd</code> 工具可以查看所有链接的库</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">ldd main<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
+<p>此外，如果要查看所有的包，可以使用</p>
+<figure><div class="code-wrapper"><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pkg-config --list-all<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></div></figure>
 <h3 id="指定-C-语言标准-std">指定 C++ 语言标准 <code>-std=</code></h3>
 <p><code>std=c++11</code> 表示使用 C++11 标准，类似的还有 <code>c++14</code>,<code>c++17</code>,<code>c++20</code>,<code>c++23</code></p>
 <p>以上这些都是 ISO C++ 标准，如果要使用 GCC 特有的标准，可以使用 <code>gnu++17</code> 等</p>
@@ -968,7 +979,7 @@ Num     Type           Disp Enb Address            What
     <div class="footer-inner">
   
     <div class="footer-content">
-       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <br> <span id="site-run-time">网站已运行 0 天</span> <br> <span id="site-total-words">博客总字数 124,674 字</span> 
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> <br> <span id="site-run-time">网站已运行 0 天</span> <br> <span id="site-total-words">博客总字数 126,565 字</span> 
     </div>
   
   
